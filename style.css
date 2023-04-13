@@ -1,0 +1,39 @@
+body {
+  background-color: lightgray;
+}
+
+h1 {
+  text-align: center;
+}
+
+#imageContainer {
+  display: flex;
+  align-items: center;
+  width: 75vw;
+  margin: auto;
+  flex-direction: column;
+  position: relative;
+  top: 0;
+  left: 0;
+}
+
+img {
+  width: 100%;
+  height: auto;
+  position: relative;
+}
+
+#frontImage {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+}
+
+#backImage {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  transform: scaleX(-1);
+}

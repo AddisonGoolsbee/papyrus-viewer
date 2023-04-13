@@ -13,8 +13,8 @@
     <main>
         <h1>Papyrus Viewer</h1>
         <div id="imageContainer" onclick="swapSides()">
-            <img src="76a.jpeg" id="frontImage">
-            <img src="76b.jpeg" id="backImage">
+            <img src="./assets/76a.jpeg" id="frontImage">
+            <img src="./assets/76b.jpeg" id="backImage">
         </div>
 
     </main>
@@ -22,60 +22,3 @@
 </body>
 
 </html>
-
-<!-- <html>
-
-<p>Welome! This is a webpage to add metadata to any image you want. Just choose a file, then fill out
-    the text boxes below, and you'll be able to save your metadata to a new file</p>
-
-<p> <label for="file" style="cursor: pointer; display: block ">Begin by uploading image file </label>
-</p>
-<p> <input type="file" accept="image/*" name="image" id="file" onchange="loadFile(event)" style="display: block;"></p>
-
-
-<div id="imageContainer" style="position: relative;">
-    <img id="output" height="40%" />
-
-</div>
-
-<p id="imagefn"> </p>
-<p id="imagefn2"> </p>
-<p> <label for="file">Choose metadata file to upload (after image upload)</label>
-    <input type="file" accept=".txt" name="meta" id="meta" onchange="loadMetadata(event)" style="display: block;">
-</p>
-
-<p>Number of people
-    <br><input id="people" type="number"></input>
-</p>
-<p>Description of any visible paintings
-    <br><textarea id="paintings"></textarea>
-</p>
-<p>Photograph condition & damage
-    <br><textarea id="damage"></textarea>
-</p>
-<p>Description of unique objects
-    <br><textarea id="objects"></textarea>
-</p>
-<p>Additional information
-    <br><textarea id="textbox"></textarea>
-</p>
-
-<p>Add a location
-<div style="border: 1px solid black; width: 200px;">
-    Object Name:<input id="locName"></input>
-    <br>x:<input id="xloc" type="number" style="width: 50px;"></input>
-    &nbsp&nbsp y:<input id="yloc" type="number" style="width: 50px;"></input>
-    <br><button id="loc" onclick="addLocation()">Add Location</button>
-</div>
-
-</p>
-
-<p id="locations"></p>
-
-<button id="create_text_file">Create metadata file</button>
-<a download="info.txt" id="downloadlink" style="display: none">Finish by downloading metadata text
-    file </a>
-
-
-
-</html> -->

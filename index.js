@@ -8,3 +8,4 @@ const swapSides = () => {
   backImage.style.zIndex = flipped ? 0 : 1;
   flipped = !flipped;
 };
+

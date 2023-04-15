@@ -15,6 +15,7 @@ h1 {
   position: relative;
   top: 0;
   left: 0;
+  transition: transform 0.5s ease-in-out;
 }
 
 img {
@@ -37,3 +38,4 @@ img {
   z-index: 1;
   transform: scaleX(-1);
 }
+

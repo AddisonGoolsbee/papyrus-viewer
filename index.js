@@ -8,3 +8,13 @@ const swapSides = () => {
   backImage.style.zIndex = flipped ? 0 : 1;
   flipped = !flipped;
 };
+
+$(document).ready(function() {
+  var angle = 0;
+  $('#tiltButton').click(function() {
+    angle += 15;
+    $('#frontImage, #backImage').css('transform', 'rotate(' + angle + 'deg)');
+  });
+});
+
+

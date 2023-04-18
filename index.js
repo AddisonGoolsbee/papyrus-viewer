@@ -16,7 +16,6 @@ function fragmentFlip() {
     });
 }
 
-
 function loadFragmentImages(fragments, path){
     $("#imageContainer img").remove();
 
@@ -52,6 +51,38 @@ function loadFragmentImages(fragments, path){
                                         stop: function (){
                                             $(this).css("border", "none");
                                         } });
+    
+    zindex = 0
+    let ctx = document.createElement("canvas").getContext("2d");
+    $("#imageContainer img").on("mousedown", function(event) {
+        let x = event.pageX;
+        let y = event.pageY;
+        let w = $(this).prop("naturalWidth");
+        let h = $(this).prop("naturalHeight");
+        ctx.canvas.width = w;
+        ctx.canvas.height = h;
+
+        let offset = $(this).offset();
+  
+        image = new Image()
+        image.src = $(this).attr("src")
+        ctx.drawImage(image, 0, 0, w, h);
+      
+        alpha = ctx.getImageData(Math.floor(x - offset.left), Math.floor(y - offset.top), 1, 1).data[3]; // [0]R [1]G [2]B [3]A
+
+        if(alpha===0) {
+            zindex = parseInt($(this).css("z-index"))
+            this.style.pointerEvents = "none";
+            $(document.elementFromPoint(event.clientX, event.clientY)).trigger("click");
+            this.style.pointerEvents = "auto";
+        }
+        
+    });
+    $("#imageContainer img").on("click", function(event) {
+        console.log(zindex)
+        $(this).css("z-index", zindex + 1)
+        console.log()
+    });
 }
 
 function loadItem() {

@@ -1,4 +1,4 @@
-
+// python3 -m http.server 8000
 function fragmentFlip() {
     let width = $(this).get(0).clientWidth;
     let newSrc = "";

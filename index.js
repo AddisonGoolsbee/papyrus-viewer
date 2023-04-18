@@ -1,6 +1,6 @@
-
 function fragmentFlip() {
     let width = $(this).get(0).clientWidth;
+    console.log(this)
     let newSrc = "";
 
     let duration = $("#enableAnimate").is(":checked") ? 300 : 0;
@@ -99,6 +99,26 @@ $(document).ready(function () {
         });
 
 });
+
+function flipWhole(){
+	
+const imageContainer = document.getElementById('imageContainer');
+
+
+const images = imageContainer.querySelectorAll('img');
+
+
+images.forEach(function(image) {
+  
+  console.log(image)
+  fragmentFlip.call(image);
+
+});
+
+	console.log("flip whole");
+}
+
+
 
 // let angle = 0;
 // $("#tiltButton").click(function () {

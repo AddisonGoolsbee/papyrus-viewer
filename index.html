@@ -1,27 +1,37 @@
 <html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Papyrus Viewer</title>
-    <link rel="stylesheet" href="./style.css">
-    <link rel="icon" href="./favicon.ico" type="image/x-icon">
-</head>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Papyrus Viewer</title>
+        <link rel="stylesheet" href="./style.css">
+        <link rel="icon" href="./favicon.ico" type="image/x-icon">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"
+            integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"
+            integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30="
+            crossorigin="anonymous"></script>
+        <script src="index.js"></script>
+    </head>
 
-<body>
-    <main>
+    <body>
         <h1>Papyrus Viewer</h1>
-        <div id="imageContainer" onclick="swapSides()">
-            <img src="./assets/76a.jpeg" id="frontImage">
-            <img src="./assets/76b.jpeg" id="backImage">
+        <label for="documentSelector">1. Select document:</label>
+        <select id="documentSelector"></select>
+        <br/>
+        <label for="itemSelector">2. Select item:</label>
+        <select id="itemSelector"></select>
+        <br/>
+        <label for="enableAnimate">Animate fragment flip?</label>
+        <input type="checkbox" id="enableAnimate" checked>
+        <br/>
+        <button id="tiltButton">Rotate Image</button>
+        <br/> <br/>
+        <div id="imageContainer">
         </div>
-        <div>
-            <button id="tiltButton">Rotate Image</button>
-        </div>
-    </main>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="index.js"></script>
-</body>
+    </body>
 
 </html>

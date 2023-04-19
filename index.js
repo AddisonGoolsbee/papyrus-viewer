@@ -48,6 +48,7 @@ function loadFragmentImages(fragments, path){
 
     $("#imageContainer img").dblclick(fragmentFlip);
     $("#imageContainer img").draggable( {
+                                        //containment: "img[src='background.js']",
                                         start: function (){
                                             $(this).css("border", "2px dashed red");
                                         },
@@ -198,11 +199,11 @@ const image = div.querySelector('img[src$="background.png"]');
 let width = 0
 
 if (image) {
-  console.log(`Image found: ${image.getAttribute('src')}`);
-  console.log(`Image dimensions: ${image.naturalWidth} x ${image.naturalHeight}`);
+  //console.log(`Image found: ${image.getAttribute('src')}`);
+  //console.log(`Image dimensions: ${image.naturalWidth} x ${image.naturalHeight}`);
   width = image.naturalWidth;
 } else {
-  console.log('Image not found');
+  //console.log('Image not found');
 }
 images.forEach(function(image, i) {
   
@@ -211,10 +212,10 @@ images.forEach(function(image, i) {
   const rect = image.getBoundingClientRect();
   const src = image.getAttribute('src');
   const filename = src.split('/').pop();
-  console.log(`Image ${i + 1} filename: ${filename}`);
-  console.log(`Image ${i + 1}: x=${rect.left}, y=${rect.top}, width=${rect.width}, height=${rect.height}`);
+  //console.log(`Image ${i + 1} filename: ${filename}`);
+  //console.log(`Image ${i + 1}: x=${rect.left}, y=${rect.top}, width=${rect.width}, height=${rect.height}`);
   if(!(filename == "background.png")){
-  	console.log(filename + "------------------------------------")
+  	//console.log(filename + "------------------------------------")
   	let cent = rect.left + rect.width/2
   	let newcent = width - cent
   	let newLoc = newcent - rect.width/2 - 200
@@ -225,5 +226,5 @@ images.forEach(function(image, i) {
 });
 
 
-	console.log("flip whole");
+	//console.log("flip whole");
 }

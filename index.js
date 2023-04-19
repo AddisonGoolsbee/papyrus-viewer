@@ -47,9 +47,14 @@ function loadFragmentImages(fragments, path){
     });
 
     $("#imageContainer img").dblclick(fragmentFlip);
+    //console.log('yes container')
+
+
     $("#imageContainer img").draggable( {
-                                        //containment: "img[src='background.js']",
+                                        containment:  'img[src$="background.png"]',
+
                                         start: function (){
+
                                             $(this).css("border", "2px dashed red");
                                         },
                                         stop: function (){

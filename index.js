@@ -71,8 +71,8 @@ function selectImage() {
     let handleSize = handle.outerWidth(true);
   
     handle.css({
-      left: ($(this).outerWidth() - handleSize) / 2 + "px",
-      top: -handleSize / 2 + "px",
+      left: ($(this).position().left + $(this).outerWidth() / 2 - handleSize / 2) + "px",
+      top: ($(this).position().top - handleSize / 2) + "px",
       "background-image":
         "url(papyrus-viewer/rotate-icon.png)", // Replace with the path to your rotate icon image
     });
@@ -94,21 +94,23 @@ function selectImage() {
     });
   
     function rotateImage(e) {
-      e.preventDefault();
-      let mouseX = e.pageX;
-      let mouseY = e.pageY;
-  
-      let centerX =
-        selectedImg.offset().left + selectedImg.width() / 2 - $(window).scrollLeft();
-      let centerY =
-        selectedImg.offset().top + selectedImg.height() / 2 - $(window).scrollTop();
-  
-      let radians = Math.atan2(mouseX - centerX, mouseY - centerY);
-      let degrees = -(radians * (180 / Math.PI)) + 90 + startAngle;
-  
-      selectedImg.css("transform", "rotate(" + degrees + "deg)").data("rotation", degrees);
-    }
+        e.preventDefault();
+        let mouseX = e.pageX;
+        let mouseY = e.pageY;
+      
+        let centerX =
+          selectedImg.offset().left + selectedImg.width() / 2 - $(window).scrollLeft();
+        let centerY =
+          selectedImg.offset().top + selectedImg.height() / 2 - $(window).scrollTop();
+      
+        let radians = Math.atan2(mouseX - centerX, mouseY - centerY);
+        let degrees = -(radians * (180 / Math.PI)) + 90 + startAngle;
+      
+        selectedImg.css("transform", "rotate(" + degrees + "deg)").data("rotation", degrees);
+        
+      }   
   }
+  
   
 
 

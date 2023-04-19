@@ -65,7 +65,7 @@ select {
     z-index: 1000;
     border: 1px solid black;
     transform: translate(-50%, -50%); /* Added to center the handle */
-    top: 0; /* Position at the top of the selected image */
+    top: 10px; /* Move the handle down by 5 pixels */
     left: 50%; /* Position at the middle of the selected image */
   }
   

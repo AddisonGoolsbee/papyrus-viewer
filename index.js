@@ -52,7 +52,66 @@ function loadFragmentImages(fragments, path){
                                         stop: function (){
                                             $(this).css("border", "none");
                                         } });
+    $("#imageContainer img").click(selectImage);
 }
+
+function selectImage() {
+    // Remove border and selected class from other images
+    $("#imageContainer img").css("border", "none").removeClass("selected");
+  
+    // Add border and selected class to selected image
+    $(this).css("border", "2px dashed red").addClass("selected");
+  
+    // Remove rotate handle from previously selected image
+    $(".rotate-handle").remove();
+  
+    // Add rotate handle to the border of selected image
+    let handle = $("<div class='rotate-handle'></div>");
+    handle.appendTo($(this).parent());
+    let handleSize = handle.outerWidth(true);
+  
+    handle.css({
+      left: ($(this).outerWidth() - handleSize) / 2 + "px",
+      top: -handleSize / 2 + "px",
+      "background-image":
+        "url(papyrus-viewer/rotate-icon.png)", // Replace with the path to your rotate icon image
+    });
+  
+    // Make the rotate handle rotatable by the mouse
+    let selectedImg = $(".selected");
+    let startX, startY, startAngle;
+  
+    handle.on("mousedown", function (e) {
+      e.preventDefault();
+      startX = e.pageX;
+      startY = e.pageY;
+      startAngle = parseInt(selectedImg.data("rotation")) || 0;
+  
+      $(document).on("mousemove", rotateImage);
+      $(document).on("mouseup", function () {
+        $(document).off("mousemove", rotateImage);
+      });
+    });
+  
+    function rotateImage(e) {
+      e.preventDefault();
+      let mouseX = e.pageX;
+      let mouseY = e.pageY;
+  
+      let centerX =
+        selectedImg.offset().left + selectedImg.width() / 2 - $(window).scrollLeft();
+      let centerY =
+        selectedImg.offset().top + selectedImg.height() / 2 - $(window).scrollTop();
+  
+      let radians = Math.atan2(mouseX - centerX, mouseY - centerY);
+      let degrees = -(radians * (180 / Math.PI)) + 90 + startAngle;
+  
+      selectedImg.css("transform", "rotate(" + degrees + "deg)").data("rotation", degrees);
+    }
+  }
+  
+
+
 
 function loadItem() {
     let doc = $("#documentSelector option:selected").val();
@@ -88,8 +147,6 @@ function buildPapyrusSelector(item_counts) {
     $("#documentSelector").on("change", refreshItemSelect)
     refreshItemSelect();
 }
-
-
 
 $(document).ready(function () {
     fetch('./documents/documents.json')

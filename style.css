@@ -69,5 +69,7 @@ select {
     left: 50%; /* Position at the middle of the selected image */
   }
   
-  
+.background {
+    pointer-events: none;
+  }
   

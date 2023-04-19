@@ -227,13 +227,3 @@ images.forEach(function(image, i) {
 
 	console.log("flip whole");
 }
-
-
-
-// let angle = 0;
-// $("#tiltButton").click(function () {
-//     angle += 15;
-//     $("#frontImage").css("transform", "rotate(" + angle + "deg)");
-//     $("#backImage").css("transform", "scaleX(-1) rotate(-" + angle + "deg)");
-// });
-//

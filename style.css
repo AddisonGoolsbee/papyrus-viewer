@@ -55,3 +55,19 @@ select {
     width: 10em;
 }
 
+.rotate-handle {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    cursor: pointer;
+    z-index: 1000;
+    border: 1px solid black;
+    transform: translate(-50%, -50%); /* Added to center the handle */
+    top: 10px; /* Move the handle down by 5 pixels */
+    left: 50%; /* Position at the middle of the selected image */
+  }
+  
+  
+  

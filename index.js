@@ -111,9 +111,6 @@ function selectImage() {
       }   
   }
   
-  
-
-
 
 function loadItem() {
     let doc = $("#documentSelector option:selected").val();

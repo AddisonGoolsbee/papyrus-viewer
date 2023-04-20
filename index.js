@@ -19,6 +19,7 @@ function fragmentFlip() {
 }
 
 function loadFragmentImages(fragments, path){
+    removeRotateHandle(); 
     $("#imageContainer img").remove();
 
     let bg_img = $("<img class='background'></img>");
@@ -162,6 +163,7 @@ function selectImage() {
   
 
 function loadItem() {
+    removeRotateHandle(); 
     let doc = $("#documentSelector option:selected").val();
     let item = Number($("#itemSelector option:selected").val()).toString().padStart(2, "0");
     let path = `documents/${doc}/${item}`;

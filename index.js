@@ -1,6 +1,5 @@
 
 // python3 -m http.server 8000
-
 function fragmentFlip() {
     let width = $(this).get(0).clientWidth;
     //console.log(this)
@@ -45,6 +44,7 @@ function loadFragmentImages(fragments, path){
             $(this).trigger('load');
         }
     });
+
 
     $("#imageContainer img").dblclick(fragmentFlip);
     //console.log('yes container')
@@ -107,7 +107,7 @@ function selectImage() {
     let handleSize = handle.outerWidth(true);
   
     handle.css({
-      left: ($(this).position().left + $(this).outerWidth() / 2 - handleSize / 2) + "px",
+      left: ($(this).position().left + $(this).outerWidth() / 2 ) + "px",
       top: ($(this).position().top - handleSize / 2) + "px",
     });
     handle.prepend($('<img>',{src:'rotate-icon-transparent.png'}).addClass("selected").attr("height", "20px").attr("width","20px"))
@@ -115,6 +115,9 @@ function selectImage() {
     // Make the rotate handle rotatable by the mouse
     let selectedImg = $(".selected");
     let startX, startY, startAngle;
+
+    const box = this;
+    const rotator = handle;
   
     handle.on("mousedown", function (e) {
       e.preventDefault();
@@ -128,22 +131,33 @@ function selectImage() {
       });
     });
   
-    function rotateImage(e) {
-        e.preventDefault();
-        let mouseX = e.pageX;
-        let mouseY = e.pageY;
-      
-        let centerX =
-          selectedImg.offset().left + selectedImg.width() / 2 - $(window).scrollLeft();
-        let centerY =
-          selectedImg.offset().top + selectedImg.height() / 2 - $(window).scrollTop();
-      
-        let radians = Math.atan2(mouseX - centerX, mouseY - centerY);
-        let degrees = -(radians * (180 / Math.PI)) + 90 + startAngle;
-      
-        selectedImg.css("transform", "rotate(" + degrees + "deg)").data("rotation", degrees);
-        
-      }   
+    function rotateBox(deg) {
+        $(box).css('transform', 'rotate(' + deg + 'deg)');      // <=
+    }
+
+
+    function rotateImage(event) {
+        initX = box.offsetLeft;             
+        initY = box.offsetTop;              
+        mousePressX = event.clientX;
+        mousePressY = event.clientY;
+
+        const arrowRects = box.getBoundingClientRect();
+        const arrowX = arrowRects.left + arrowRects.width / 2;
+        const arrowY = arrowRects.top + arrowRects.height / 2;
+
+        function eventMoveHandler(event) {
+            const angle = Math.atan2(event.clientY - arrowY, event.clientX - arrowX) + Math.PI / 2;
+            rotateBox(angle * 180 / Math.PI);
+        }
+
+        window.addEventListener('mousemove', eventMoveHandler, false);
+        window.addEventListener('mouseup', function eventEndHandler() {
+            window.removeEventListener('mousemove', eventMoveHandler, false);
+            window.removeEventListener('mouseup', eventEndHandler);
+        }, false);
+    }
+
   }
   
 

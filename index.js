@@ -81,7 +81,6 @@ function loadFragmentImages(fragments, path){
         alpha = ctx.getImageData(Math.floor(x - offset.left), Math.floor(y - offset.top), 1, 1).data[3]; // [0]R [1]G [2]B [3]A
 
         if(alpha===0) {
-            zindex = parseInt($(this).css("z-index"))
             this.style.pointerEvents = "none";
             $(document.elementFromPoint(event.clientX, event.clientY)).trigger("click");
             this.style.pointerEvents = "auto";
@@ -91,7 +90,8 @@ function loadFragmentImages(fragments, path){
 }
 
 function selectImage() {
-    $(this).css("z-index", zindex + 1)
+    $(this).css("z-index", zindex + 1);
+    zindex = zindex + 1;
     // Remove border and selected class from other images
     $("#imageContainer img").css("border", "none").removeClass("selected");
   

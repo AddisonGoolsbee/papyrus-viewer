@@ -56,6 +56,7 @@ function loadFragmentImages(fragments, path){
 
                                         start: function (){
                                             $(".rotate-handle").remove();
+                                            $("#imageContainer img").css("border", "none").removeClass("selected");
                                             $(this).css("border", "2px dashed red");
                                         },
                                         stop: function (){

@@ -226,13 +226,14 @@ if (image) {
 images.forEach(function(image, i) {
   
   //console.log(image)
-  fragmentFlip.call(image);
+  
   const rect = image.getBoundingClientRect();
   const src = image.getAttribute('src');
   const filename = src.split('/').pop();
   //console.log(`Image ${i + 1} filename: ${filename}`);
   //console.log(`Image ${i + 1}: x=${rect.left}, y=${rect.top}, width=${rect.width}, height=${rect.height}`);
   if(!(filename == "background.png")){
+    fragmentFlip.call(image);
   	//console.log(filename + "------------------------------------")
   	let cent = rect.left + rect.width/2
   	let newcent = width - cent

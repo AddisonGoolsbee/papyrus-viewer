@@ -22,6 +22,7 @@ function loadFragmentImages(fragments, path) {
   $("#imageContainer img").remove();
 
   let bg_img = $("<img id='background'></img>");
+  bg_img.css("zIndex", -1);
   if (!$("#showBackground").is(":checked")) {
     bg_img.css("opacity", 0);
   }

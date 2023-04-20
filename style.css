@@ -1,9 +1,19 @@
 body {
-    background-color: lightgray;
+    background-color: white;
+    font-family: 'Open Sans';
+    margin: 0;
 }
 
 h1 {
-    text-align: center;
+    text-align: left;
+    margin-left: 21px;
+    margin-bottom: 0;
+    margin-top: 0;
+    font-family: 'Eczar';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 48px;
+    line-height: 85px;
 }
 
 #imageContainer {
@@ -72,4 +82,51 @@ select {
 .background {
     pointer-events: none;
   }
+
+.navbar {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    /* padding-left: 5; */
+    overflow: hidden;
+    background-color: #A5243D;
+}
+
+.navbar-item {
+    float: left;
+}
+
+.navbar-item a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 15px 50px;
+    text-decoration: none;
+    font-family: 'Open Sans';
+}
+
+.navbar-item a:hover {
+    background-color: #631524;
+}
+
+#content {
+    margin: 20px;
+}
+
+button, label, select {
+    font-family: 'Open Sans';
+}
+
+label {
+    padding: 10px;
+}
+
+button {
+    margin: 10px;
+    background-color: white;
+    border-radius: 5px;
+    /* border: #A5243D; */
+    padding: 10px;
+    /* color: white; */
+}
   

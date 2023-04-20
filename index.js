@@ -54,7 +54,7 @@ function loadFragmentImages(fragments, path){
                                         containment:  'img[src$="background.png"]',
 
                                         start: function (){
-
+                                            $(".rotate-handle").remove();
                                             $(this).css("border", "2px dashed red");
                                         },
                                         stop: function (){

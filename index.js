@@ -229,7 +229,7 @@ function flipWhole(){
         fragmentFlip.call(image);
         let cent = rect.left + rect.width/2
         let newcent = width - cent
-        let newLoc = newcent - rect.width/2 - 200
+        let newLoc = newcent - rect.width/2
         image.style.left = `${newLoc}px`;   
       }
     });

@@ -17,13 +17,23 @@ function fragmentFlip() {
   });
 }
 
+var pathg;
+
 function loadFragmentImages(fragments, path) {
   removeRotateHandle();
+  pathg = path;
   $("#imageContainer img").remove();
+
+  if ($("#showBackground").is(":checked")) {
+    let bg_img = $("<img id='background'></img>");
+    $("#imageContainer").append(bg_img);
+    bg_img.attr("src", `${path}/fragments/background.png`);
+  }
 
   for (f in fragments) {
     let f_img = $("<img></img>");
     $("#imageContainer").append(f_img);
+
     f_img.css("left", fragments[f].split(",")[0] + "px");
     f_img.css("top", fragments[f].split(",")[1] + "px");
 
@@ -33,6 +43,12 @@ function loadFragmentImages(fragments, path) {
     });
     f_img.attr("src", `${path}/fragments/${f}_front.png`);
   }
+
+  $("#imageContainer img").each(function () {
+    if (this.complete) {
+      $(this).trigger("load");
+    }
+  });
 
   $("#imageContainer img").dblclick(fragmentFlip);
   //console.log('yes container')
@@ -191,6 +207,19 @@ $(document).ready(function () {
     .then((data) => {
       buildPapyrusSelector(data);
     });
+
+  $("#showBackground").click(function () {
+    if (!$(this).is(":checked")) {
+      console.log("hey");
+      let bg_img = $("#background");
+      bg_img.remove();
+    } else {
+      let bg_img = $("<img id='background'></img>");
+      bg_img.css("z-index", -10);
+      $("#imageContainer").append(bg_img);
+      bg_img.attr("src", `${pathg}/fragments/background.png`);
+    }
+  });
 });
 
 function flipWhole() {

@@ -17,18 +17,16 @@ function fragmentFlip() {
   });
 }
 
-var pathg;
-
 function loadFragmentImages(fragments, path) {
   removeRotateHandle();
-  pathg = path;
   $("#imageContainer img").remove();
 
-  if ($("#showBackground").is(":checked")) {
-    let bg_img = $("<img id='background'></img>");
-    $("#imageContainer").append(bg_img);
-    bg_img.attr("src", `${path}/fragments/background.png`);
+  let bg_img = $("<img id='background'></img>");
+  if (!$("#showBackground").is(":checked")) {
+    bg_img.css("opacity", 0);
   }
+  $("#imageContainer").append(bg_img);
+  bg_img.attr("src", `${path}/fragments/background.png`);
 
   for (f in fragments) {
     let f_img = $("<img></img>");
@@ -209,15 +207,11 @@ $(document).ready(function () {
     });
 
   $("#showBackground").click(function () {
-    if (!$(this).is(":checked")) {
-      console.log("hey");
-      let bg_img = $("#background");
-      bg_img.remove();
+    let bg_img = $("#background");
+    if (!$("#showBackground").is(":checked")) {
+      bg_img.css("opacity", 0);
     } else {
-      let bg_img = $("<img id='background'></img>");
-      bg_img.css("z-index", -10);
-      $("#imageContainer").append(bg_img);
-      bg_img.attr("src", `${pathg}/fragments/background.png`);
+      bg_img.css("opacity", 1);
     }
   });
 });

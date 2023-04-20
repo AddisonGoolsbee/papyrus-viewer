@@ -109,9 +109,8 @@ function selectImage() {
     handle.css({
       left: ($(this).position().left + $(this).outerWidth() / 2 - handleSize / 2) + "px",
       top: ($(this).position().top - handleSize / 2) + "px",
-      "background-image":
-        "url(papyrus-viewer/rotate-icon.png)", // Replace with the path to your rotate icon image
     });
+    handle.prepend($('<img>',{src:'rotate-icon-transparent.png'}).addClass("selected").attr("height", "20px").attr("width","20px"))
   
     // Make the rotate handle rotatable by the mouse
     let selectedImg = $(".selected");

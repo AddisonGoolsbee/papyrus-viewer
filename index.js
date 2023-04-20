@@ -206,44 +206,33 @@ $(document).ready(function () {
 });
 
 function flipWhole(){
-	
-const imageContainer = document.getElementById('imageContainer');
-
-
-const images = imageContainer.querySelectorAll('img');
-
-const div = imageContainer;
-const image = div.querySelector('img[src$="background.png"]');
-let width = 0
-
-if (image) {
-  //console.log(`Image found: ${image.getAttribute('src')}`);
-  //console.log(`Image dimensions: ${image.naturalWidth} x ${image.naturalHeight}`);
-  width = image.naturalWidth;
-} else {
-  //console.log('Image not found');
-}
-images.forEach(function(image, i) {
+    const imageContainer = document.getElementById('imageContainer');
+    const images = imageContainer.querySelectorAll('img');
+    const div = imageContainer;
+    const image = div.querySelector('img[src$="background.png"]');
+    let width = 0;
   
-  //console.log(image)
+    if (image) {
+      width = image.naturalWidth;
+    } 
   
-  const rect = image.getBoundingClientRect();
-  const src = image.getAttribute('src');
-  const filename = src.split('/').pop();
-  //console.log(`Image ${i + 1} filename: ${filename}`);
-  //console.log(`Image ${i + 1}: x=${rect.left}, y=${rect.top}, width=${rect.width}, height=${rect.height}`);
-  if(!(filename == "background.png")){
-    fragmentFlip.call(image);
-  	//console.log(filename + "------------------------------------")
-  	let cent = rect.left + rect.width/2
-  	let newcent = width - cent
-  	let newLoc = newcent - rect.width/2 - 200
-  	image.style.left = `${newLoc}px`;
-  	
+    images.forEach(function(image, i) {  
+      const rect = image.getBoundingClientRect();
+      const src = image.getAttribute('src');
+      const filename = src.split('/').pop();
+  
+      if(!(filename == "background.png")){
+        removeRotateHandle(); // Remove the rotate handle before flipping the image
+        fragmentFlip.call(image);
+        let cent = rect.left + rect.width/2
+        let newcent = width - cent
+        let newLoc = newcent - rect.width/2 - 200
+        image.style.left = `${newLoc}px`;   
+      }
+    });
   }
   
-});
-
-
-	//console.log("flip whole");
-}
+function removeRotateHandle() {
+    $(".rotate-handle").remove();
+  }
+  

@@ -1,5 +1,4 @@
-body {
-  background-color: lightgray;
+/* background-color: lightgray;
 }
 
 h1 {
@@ -17,7 +16,42 @@ h1 {
   height: 80vh;
   position: absolute;
   display: block;
+  object-fit: fill; */
+
+body {
+  background-color: white;
+  font-family: "Open Sans";
+  margin: 0;
+}
+
+h1 {
+  text-align: left;
+  margin-left: 21px;
+  margin-bottom: 0;
+  margin-top: 0;
+  font-family: "Eczar";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 48px;
+  line-height: 85px;
+}
+
+#imageContainer {
+  /* width: 100%; */
+  /* height: 100%; */
+  background-image: linear-gradient(45deg, #fff 25%, transparent 25%), linear-gradient(-45deg, #fff 25%, transparent 25%), linear-gradient(45deg, transparent 75%, #fff 75%), linear-gradient(-45deg, transparent 75%, #fff 75%);
+
+  background-size: 20px 20px;
+  background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+  position: relative;
+}
+
+#imageContainer img {
+  height: auto;
+  position: absolute;
+  display: block;
   object-fit: fill;
+  z-index: 0;
 }
 
 /* #imageContainer img.background { */
@@ -46,4 +80,71 @@ label {
 
 select {
   width: 10em;
+}
+
+.rotate-handle {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background-repeat: no-repeat;
+  background-size: 100%;
+  cursor: pointer;
+  z-index: 1000;
+  border: 1px solid black;
+  transform: translate(-50%, -50%); /* Added to center the handle */
+  top: 10px; /* Move the handle down by 5 pixels */
+  left: 50%; /* Position at the middle of the selected image */
+}
+
+.background {
+  pointer-events: none;
+}
+
+.navbar {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  /* padding-left: 5; */
+  overflow: hidden;
+  background-color: #a5243d;
+}
+
+.navbar-item {
+  float: left;
+}
+
+.navbar-item a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 15px 50px;
+  text-decoration: none;
+  font-family: "Open Sans";
+}
+
+.navbar-item a:hover {
+  background-color: #631524;
+}
+
+#content {
+  margin: 20px;
+}
+
+button,
+label,
+select {
+  font-family: "Open Sans";
+}
+
+label {
+  padding: 10px;
+}
+
+button {
+  margin: 10px;
+  background-color: white;
+  border-radius: 5px;
+  /* border: #A5243D; */
+  padding: 10px;
+  /* color: white; */
 }

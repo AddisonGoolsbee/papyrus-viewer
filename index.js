@@ -11,10 +11,16 @@ function fragmentFlip() {
   } else {
     newSrc = $(this).attr("src").replace("back.png", "front.png");
   }
-  $(this).animate({ width: "0px", marginLeft: `${width / 2}px` }, duration, "swing", function () {
-    $(this).attr("src", newSrc);
-    $(this).animate({ width: width, marginLeft: `0px` }, duration, "swing");
-  });
+
+  
+    $(this).animate({ width: "0px", marginLeft: `${width / 2}px` }, duration, "swing", function () {
+        $(this).attr("src", newSrc);
+        $(this).animate({ width: width, marginLeft: `0px` }, duration, "swing");
+    });
+  
+  console.log(this.getBoundingClientRect())
+  
+
 }
 
 function loadFragmentImages(fragments, path) {
@@ -221,25 +227,31 @@ function flipWhole() {
   const imageContainer = document.getElementById("imageContainer");
   const images = imageContainer.querySelectorAll("img");
   const div = imageContainer;
-  const image = div.querySelector('img[src$="background.png"]');
+  const bimage = div.querySelector('img[src$="background.png"]');
   let width = 0;
 
-  if (image) {
-    width = image.naturalWidth;
+  if (bimage) {
+    width = bimage.naturalWidth;
   }
 
   images.forEach(function (image, i) {
-    const rect = image.getBoundingClientRect();
+
+    let rect = image.getBoundingClientRect();
     const src = image.getAttribute("src");
     const filename = src.split("/").pop();
-
+    console.log('need to know rect ', rect)
     if (!(filename == "background.png")) {
       removeRotateHandle(); // Remove the rotate handle before flipping the image
+      console.log(rect.left, " before flip")
       fragmentFlip.call(image);
-      let cent = rect.left + rect.width / 2;
-      let newcent = width - cent;
-      let newLoc = newcent - rect.width / 2 - 200;
-      image.style.left = `${newLoc}px`;
+      console.log(image.getBoundingClientRect().left, " after flip")
+      //width of bunding is 20 lower if we are not animating some times
+      //rect = image.getBoundingClientRect()
+      let newleft =  width - rect.left - rect.width
+      //console.log(image.naturalWidth, rect.left, width, bimage.getBoundingClientRect().left, width + bimage.getBoundingClientRect().left)
+      //console.log("new left is " + newleft + " and old left was- " + rect.left)
+      image.style.left = `${newleft}px`;
+      console.log(newleft, " new left after ")
     }
   });
 }

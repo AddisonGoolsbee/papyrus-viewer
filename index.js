@@ -382,14 +382,3 @@ function removeRotateHandle() {
   $(".rotate-handle").remove();
 }
 
-$(document).ready(function() {
-  $('#toggleButton').click(function() {
-    if ($('body').css('cursor') === 'zoom-in') {
-      $('body').css('cursor', '');
-      $(this).removeClass('active');
-    } else {
-      $('body').css('cursor', 'zoom-in');
-      $(this).addClass('active');
-    }
-  });
-});

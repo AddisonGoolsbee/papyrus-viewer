@@ -257,7 +257,7 @@ function buildItemSelector(item_counts) {
   $("#itemSelector option").remove();
   let count = item_counts[$("#documentSelector option:selected").val()];
   for (let i = 1; i <= count; i++) {
-    $("#itemSelector").append(`<option value=${i}> Item #${i}</option>`);
+    $("#itemSelector").append(`<option value=${i}> Frame #${i}</option>`);
   }
   $("#itemSelector").on("change", loadItem);
   loadItem();
@@ -266,7 +266,7 @@ function buildItemSelector(item_counts) {
 function buildPapyrusSelector(item_counts) {
   $("#documentSelector option").remove();
   for (p in item_counts) {
-    $("#documentSelector").append(`<option value=${p}>${p} (${item_counts[p]} item${item_counts[p] > 1 ? "s" : ""})</option>`);
+    $("#documentSelector").append(`<option value=${p}>${p} (${item_counts[p]} frame${item_counts[p] > 1 ? "s" : ""})</option>`);
   }
   buildItemSelector(item_counts);
   function refreshItemSelect() {

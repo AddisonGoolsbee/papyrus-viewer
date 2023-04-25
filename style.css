@@ -173,7 +173,7 @@ button:active {
 
 select {
   font-size: min(18px, 1.5vw);
-  width: 12vw;
+  width: 12em;
 }
 
 #selectorContainer {

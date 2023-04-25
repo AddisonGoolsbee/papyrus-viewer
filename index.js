@@ -1,5 +1,10 @@
 // python3 -m http.server 8000
 function fragmentFlip() {
+
+  if ($(this).attr("src").includes("background.png")) {
+    return;
+  }
+
   let width = $(this).get(0).clientWidth;
   //console.log(this)
   let newSrc = "";

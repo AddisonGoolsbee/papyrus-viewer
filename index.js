@@ -163,7 +163,118 @@ function loadFragmentImages(fragments, path) {
   });
 }
 
+function selectImage() {
+  if ($('body').css('cursor') === 'zoom-in') {
+    // Check if the image is already enlarged
+    if ($(this).data("enlarged")) {
+      $(this).css({
+        width: $(this).data("origWidth"),
+        height: $(this).data("origHeight"),
+        position: 'absolute',
+        top: $(this).data("origTop") + 'px',
+        left: $(this).data("origLeft") + 'px',
+      });
+      $(this).removeData("enlarged");
+    } else {
+      // Store original position and size
+      var origWidth = $(this).width();
+      var origHeight = $(this).height();
+      var origTop = $(this).position().top;
+      var origLeft = $(this).position().left;
 
+      // Enlarge the image
+      $(this).css({
+        width: origWidth * 2,
+        height: origHeight * 2,
+        position: 'absolute',
+        top: origTop - origHeight / 2 + 'px',
+        left: origLeft - origWidth / 2 + 'px',
+      });
+      $(this).data({
+        enlarged: true,
+        origWidth: origWidth,
+        origHeight: origHeight,
+        origTop: origTop,
+        origLeft: origLeft,
+      });
+    }
+  }
+
+  if ($(this).attr("src").includes("background.png")) {
+    return;
+  }
+
+  $(this).css("z-index", zindex + 1);
+  zindex = zindex + 1;
+  // Remove outline and selected class from other images
+  $("#imageContainer img").css("outline", "none").removeClass("selected");
+
+  // Add outline and selected class to selected image
+  $(this).css("outline", "2px dashed red").addClass("selected");
+
+  // Remove rotate handle from previously selected image
+  $(".rotate-handle").remove();
+
+  // Add rotate handle to the border of selected image
+  let handle = $("<div class='rotate-handle'></div>");
+  handle.appendTo($(this).parent());
+  let handleSize = handle.outerWidth(true);
+
+  handle.css({
+    left: $(this).position().left + $(this).outerWidth() / 2 + "px",
+    top: $(this).position().top - handleSize / 2 + "px",
+  });
+  handle.prepend($("<img>", { src: "rotate-icon-transparent.png" }).addClass("selected").attr("height", "20px").attr("width", "20px"));
+
+  // Make the rotate handle rotatable by the mouse
+  let selectedImg = $(".selected");
+  let startX, startY, startAngle;
+
+  const box = this;
+  const rotator = handle;
+
+  handle.on("mousedown", function (e) {
+    e.preventDefault();
+    startX = e.pageX;
+    startY = e.pageY;
+    startAngle = parseInt(selectedImg.data("rotation")) || 0;
+
+    $(document).on("mousemove", rotateImage);
+    $(document).on("mouseup", function () {
+      $(document).off("mousemove", rotateImage);
+    });
+  });
+
+  function rotateBox(deg) {
+    $(box).css("transform", "rotate(" + deg + "deg)"); // <=
+  }
+
+  function rotateImage(event) {
+    initX = box.offsetLeft;
+    initY = box.offsetTop;
+    mousePressX = event.clientX;
+    mousePressY = event.clientY;
+
+    const arrowRects = box.getBoundingClientRect();
+    const arrowX = arrowRects.left + arrowRects.width / 2;
+    const arrowY = arrowRects.top + arrowRects.height / 2;
+
+    function eventMoveHandler(event) {
+      const angle = Math.atan2(event.clientY - arrowY, event.clientX - arrowX) + Math.PI / 2;
+      rotateBox((angle * 180) / Math.PI);
+    }
+
+    window.addEventListener("mousemove", eventMoveHandler, false);
+    window.addEventListener(
+      "mouseup",
+      function eventEndHandler() {
+        window.removeEventListener("mousemove", eventMoveHandler, false);
+        window.removeEventListener("mouseup", eventEndHandler);
+      },
+      false
+    );
+  }
+}
 
 function loadItem() {
   removeRotateHandle();
@@ -271,3 +382,14 @@ function removeRotateHandle() {
   $(".rotate-handle").remove();
 }
 
+$(document).ready(function() {
+  $('#toggleButton').click(function() {
+    if ($('body').css('cursor') === 'zoom-in') {
+      $('body').css('cursor', '');
+      $(this).removeClass('active');
+    } else {
+      $('body').css('cursor', 'zoom-in');
+      $(this).addClass('active');
+    }
+  });
+});

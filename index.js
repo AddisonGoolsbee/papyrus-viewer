@@ -16,9 +16,9 @@
   $.fn.draggablePatched = function (options) {
     options = options || {};
     return this.draggable({
-      cursor: options.cursor || 'move',
+      cursor: options.cursor || "move",
       zIndex: 100,
-      drag: function(event, ui) {
+      drag: function (event, ui) {
         __dx = ui.position.left - ui.originalPosition.left;
         __dy = ui.position.top - ui.originalPosition.top;
         ui.position.left = ui.originalPosition.left + __dx + __recoupLeft;
@@ -27,25 +27,25 @@
           options.drag(event, ui);
         }
       },
-      start: function(event, ui) {
-        var left = parseIntSafe($(this).css('left'));
-        var top = parseIntSafe($(this).css('top'));
+      start: function (event, ui) {
+        var left = parseIntSafe($(this).css("left"));
+        var top = parseIntSafe($(this).css("top"));
         __recoupLeft = left - ui.position.left;
         __recoupTop = top - ui.position.top;
         if (options.start) {
           options.start(event, ui);
         }
       },
-      stop: function() {
+      stop: function () {
         if (options.stop) {
           options.stop.call(this);
         }
       },
-      create: function() {
+      create: function () {
         if (options.create) {
           options.create.call(this);
         }
-      }
+      },
     });
   };
 })(jQuery);
@@ -74,6 +74,7 @@ function fragmentFlip() {
 
 function loadFragmentImages(fragments, path) {
   removeRotateHandle();
+  let resize = 0;
   $("#imageContainer img").remove();
 
   let bg_img = $("<img id='background'></img>");
@@ -86,8 +87,16 @@ function loadFragmentImages(fragments, path) {
   bg_img.attr("src", `${path}/fragments/background.png`);
 
   bg_img.on("load", function () {
-    console.log(bg_img.get(0).naturalWidth);
-    $("#imageContainer").css("width", bg_img.get(0).naturalWidth);
+    const resizedWindowHeight = window.innerHeight * 0.75;
+    console.log($("#imageContainer").css("height"), resizedWindowHeight, window.innerHeight);
+    let temp = bg_img.css("height");
+    temp = temp.replace(/\D/g, "");
+
+    resize = resizedWindowHeight / temp;
+
+    bg_img.css("height", `${temp * resize}`);
+    console.log(bg_img.css("width"));
+    $("#imageContainer").css("width", bg_img.css("width"));
   });
 
   for (f in fragments) {
@@ -115,11 +124,11 @@ function loadFragmentImages(fragments, path) {
   $("#imageContainer img").draggablePatched({
     containment: 'img[src$="background.png"]',
     start: function () {
-     $(".rotate-handle").remove();
-     $(this).css("outline", "2px dashed red");
+      $(".rotate-handle").remove();
+      $(this).css("outline", "2px dashed red");
     },
     stop: function () {
-     $(this).css("outline", "none");
+      $(this).css("outline", "none");
     },
   });
   $("#imageContainer img").click(selectImage);
@@ -288,6 +297,9 @@ $(document).ready(function () {
 });
 
 function flipWhole() {
+  console.log($("#imageContainer").height, window.innerHeight, window.innerHeight * 0.85, window.innerWidth);
+
+  return;
   $("#flipWholeButton").prop("disabled", true);
   setTimeout(function () {
     $("#flipWholeButton").prop("disabled", false);

@@ -155,6 +155,13 @@ function selectImage() {
     return;
   }
 
+  if ($(this).hasClass("selected")) {
+    // Deselect this if it's currently selected
+    $("#imageContainer img").css("outline", "none").removeClass("selected");
+    $(".rotate-handle").remove();
+    return;
+  }
+
   $(this).css("z-index", zindex + 1);
   zindex = zindex + 1;
   // Remove outline and selected class from other images

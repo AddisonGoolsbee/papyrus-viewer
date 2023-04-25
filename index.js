@@ -198,8 +198,10 @@ function selectImage() {
   //update metadata
   var paragraph = document.querySelector('#metadata-fragment');
   var src = $(this).attr("src")
-  var filename = src.split("/").pop();
-  paragraph.innerHTML = "text of " + filename + ' is: New metadata here.';
+  var filename_full = src.split("/").pop().split('.')[0];
+  var filename = filename_full.split('_')[0]
+  var side = filename_full.split('_')[1]
+  paragraph.innerHTML = "text of " + side + " side of " + filename + ' is: New metadata here.';
   console.log("-change md-")
 
   const box = this;

@@ -240,7 +240,7 @@ function flipWhole() {
 
     if (!(filename == "background.png")) {
       removeRotateHandle(); // Remove the rotate handle before flipping the image
-      fragmentFlip.call(image);
+      // fragmentFlip.call(image);
       let cent = rect.left + rect.width / 2;
       let newcent = width - cent;
       let newLoc = newcent - rect.width / 2 - 200;

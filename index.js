@@ -169,14 +169,56 @@ function loadFragmentImages(fragments, path) {
 }
 
 function selectImage() {
-  if ($(this).attr("src").includes("background.png")) {
-    return;
-  }
+  // Check if the image is already selected
+if ($(this).hasClass("selected")) {
 
-  if ($(this).hasClass("selected")) {
-    // Deselect this if it's currently selected
-    $("#imageContainer img").css("outline", "none").removeClass("selected");
-    $(".rotate-handle").remove();
+  // Check if the zoom-in cursor is active
+  if ($('body').css('cursor') === 'zoom-in') {
+
+    // Check if the image is already enlarged
+    if ($(this).data("enlarged")) {
+      $(this).css({
+        width: $(this).data("origWidth"),
+        height: $(this).data("origHeight"),
+        position: 'absolute',
+        top: $(this).data("origTop") + 'px',
+        left: $(this).data("origLeft") + 'px',
+      });
+      $(this).removeData("enlarged");
+    } else {
+      // Store original position and size
+      var origWidth = $(this).width();
+      var origHeight = $(this).height();
+      var origTop = $(this).position().top;
+      var origLeft = $(this).position().left;
+
+      // Enlarge the image
+      $(this).css({
+        width: origWidth * 2,
+        height: origHeight * 2,
+        position: 'absolute',
+        top: origTop - origHeight / 2 + 'px',
+        left: origLeft - origWidth / 2 + 'px',
+      });
+      $(this).data({
+        enlarged: true,
+        origWidth: origWidth,
+        origHeight: origHeight,
+        origTop: origTop,
+        origLeft: origLeft,
+      });
+    }
+  }
+}
+else {
+  // Deselect this if it's currently selected
+  $("#imageContainer img").css("outline", "none").removeClass("selected");
+  $(".rotate-handle").remove();
+}
+
+
+
+  if ($(this).attr("src").includes("background.png")) {
     return;
   }
 
@@ -205,16 +247,6 @@ function selectImage() {
   // Make the rotate handle rotatable by the mouse
   let selectedImg = $(".selected");
   let startX, startY, startAngle;
-
-
-  //update text of image
-  var paragraph = document.querySelector('#metadata-fragment');
-  var src = $(this).attr("src")
-  var filename_full = src.split("/").pop().split('.')[0];
-  var filename = filename_full.split('_')[0]
-  var side = filename_full.split('_')[1]
-  paragraph.innerHTML = "text of " + side + " side of " + filename + ' is: Unknown';
-  //console.log("-change md-")
 
   const box = this;
   const rotator = handle;
@@ -368,3 +400,15 @@ function flipWhole() {
 function removeRotateHandle() {
   $(".rotate-handle").remove();
 }
+
+$(document).ready(function() {
+  $('#toggleButton').click(function() {
+    if ($('body').css('cursor') === 'zoom-in') {
+      $('body').css('cursor', '');
+      $(this).removeClass('active');
+    } else {
+      $('body').css('cursor', 'zoom-in');
+      $(this).addClass('active');
+    }
+  });
+});

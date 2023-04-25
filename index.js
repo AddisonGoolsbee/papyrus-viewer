@@ -111,17 +111,15 @@ function loadFragmentImages(fragments, path) {
   });
 
   $("#imageContainer img").dblclick(fragmentFlip);
-  //console.log('yes container')
 
   $("#imageContainer img").draggablePatched({
     containment: 'img[src$="background.png"]',
-
     start: function () {
-      $(".rotate-handle").remove();
-      $(this).css("border", "2px dashed red");
+     $(".rotate-handle").remove();
+     $(this).css("outline", "2px dashed red");
     },
     stop: function () {
-      $(this).css("border", "none");
+     $(this).css("outline", "none");
     },
   });
   $("#imageContainer img").click(selectImage);
@@ -159,11 +157,11 @@ function selectImage() {
 
   $(this).css("z-index", zindex + 1);
   zindex = zindex + 1;
-  // Remove border and selected class from other images
-  $("#imageContainer img").css("border", "none").removeClass("selected");
+  // Remove outline and selected class from other images
+  $("#imageContainer img").css("outline", "none").removeClass("selected");
 
-  // Add border and selected class to selected image
-  $(this).css("border", "2px dashed red").addClass("selected");
+  // Add outline and selected class to selected image
+  $(this).css("outline", "2px dashed red").addClass("selected");
 
   // Remove rotate handle from previously selected image
   $(".rotate-handle").remove();

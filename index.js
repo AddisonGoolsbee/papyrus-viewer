@@ -63,6 +63,14 @@ function fragmentFlip() {
   } else {
     newSrc = $(this).attr("src").replace("back.png", "front.png");
   }
+  //update text of image
+  var paragraph = document.querySelector('#metadata-fragment');
+  var src = newSrc
+  var filename_full = src.split("/").pop().split('.')[0];
+  var filename = filename_full.split('_')[0]
+  var side = filename_full.split('_')[1]
+  paragraph.innerHTML = "text of " + side + " side of " + filename + ' is: New text.';
+  //console.log('new')
 
   if ($("#enableAnimate").is(":checked")) {
     let duration = 300;
@@ -75,7 +83,11 @@ function fragmentFlip() {
     $(this).one("load", function() {
       $(this).css("width", `${width}px`);
     });
+
+
   }
+
+
 
 }
 
@@ -195,14 +207,14 @@ function selectImage() {
   let startX, startY, startAngle;
 
 
-  //update metadata
+  //update text of image
   var paragraph = document.querySelector('#metadata-fragment');
   var src = $(this).attr("src")
   var filename_full = src.split("/").pop().split('.')[0];
   var filename = filename_full.split('_')[0]
   var side = filename_full.split('_')[1]
-  paragraph.innerHTML = "text of " + side + " side of " + filename + ' is: New metadata here.';
-  console.log("-change md-")
+  paragraph.innerHTML = "text of " + side + " side of " + filename + ' is: New text.';
+  //console.log("-change md-")
 
   const box = this;
   const rotator = handle;

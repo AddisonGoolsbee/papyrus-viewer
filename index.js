@@ -83,12 +83,7 @@ function fragmentFlip() {
     $(this).one("load", function() {
       $(this).css("width", `${width}px`);
     });
-
-
   }
-
-
-
 }
 
 function loadFragmentImages(fragments, path) {
@@ -169,12 +164,7 @@ function loadFragmentImages(fragments, path) {
 }
 
 function selectImage() {
-  // Check if the image is already selected
-if ($(this).hasClass("selected")) {
-
-  // Check if the zoom-in cursor is active
   if ($('body').css('cursor') === 'zoom-in') {
-
     // Check if the image is already enlarged
     if ($(this).data("enlarged")) {
       $(this).css({
@@ -209,14 +199,6 @@ if ($(this).hasClass("selected")) {
       });
     }
   }
-}
-else {
-  // Deselect this if it's currently selected
-  $("#imageContainer img").css("outline", "none").removeClass("selected");
-  $(".rotate-handle").remove();
-}
-
-
 
   if ($(this).attr("src").includes("background.png")) {
     return;
@@ -394,7 +376,6 @@ function flipWhole() {
   if(disableAnimation){
     checkbox.checked = true;
   }
-  
 }
 
 function removeRotateHandle() {

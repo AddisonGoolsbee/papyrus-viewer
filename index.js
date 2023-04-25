@@ -16,9 +16,9 @@
   $.fn.draggablePatched = function (options) {
     options = options || {};
     return this.draggable({
-      cursor: options.cursor || "move",
+      cursor: options.cursor || 'move',
       zIndex: 100,
-      drag: function (event, ui) {
+      drag: function(event, ui) {
         __dx = ui.position.left - ui.originalPosition.left;
         __dy = ui.position.top - ui.originalPosition.top;
         ui.position.left = ui.originalPosition.left + __dx + __recoupLeft;
@@ -27,25 +27,25 @@
           options.drag(event, ui);
         }
       },
-      start: function (event, ui) {
-        var left = parseIntSafe($(this).css("left"));
-        var top = parseIntSafe($(this).css("top"));
+      start: function(event, ui) {
+        var left = parseIntSafe($(this).css('left'));
+        var top = parseIntSafe($(this).css('top'));
         __recoupLeft = left - ui.position.left;
         __recoupTop = top - ui.position.top;
         if (options.start) {
           options.start(event, ui);
         }
       },
-      stop: function (event, ui) {
+      stop: function() {
         if (options.stop) {
-          options.stop(event, ui);
+          options.stop.call(this);
         }
       },
-      create: function (event, ui) {
+      create: function() {
         if (options.create) {
-          options.create(event, ui);
+          options.create.call(this);
         }
-      },
+      }
     });
   };
 })(jQuery);

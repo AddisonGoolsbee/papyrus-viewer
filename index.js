@@ -58,15 +58,15 @@ function loadFragmentImages(fragments, path) {
   //console.log('yes container')
 
   $("#imageContainer img").draggable({
-    containment: 'img[src$="background.png"]',
+                                     containment: 'img[src$="background.png"]',
 
-    start: function () {
-      $(".rotate-handle").remove();
-      $(this).css("border", "2px dashed red");
-    },
-    stop: function () {
-      $(this).css("border", "none");
-    },
+                                     start: function () {
+                                       $(".rotate-handle").remove();
+                                       $(this).css("border", "2px dashed red");
+                                     },
+                                     stop: function () {
+                                       $(this).css("border", "none");
+                                     },
   });
   $("#imageContainer img").click(selectImage);
 
@@ -97,6 +97,11 @@ function loadFragmentImages(fragments, path) {
 }
 
 function selectImage() {
+
+  if ($(this).attr("src").includes("background.png")) {
+    return;
+  }
+
   $(this).css("z-index", zindex + 1);
   zindex = zindex + 1;
   // Remove border and selected class from other images
@@ -114,8 +119,8 @@ function selectImage() {
   let handleSize = handle.outerWidth(true);
 
   handle.css({
-    left: $(this).position().left + $(this).outerWidth() / 2 + "px",
-    top: $(this).position().top - handleSize / 2 + "px",
+             left: $(this).position().left + $(this).outerWidth() / 2 + "px",
+             top: $(this).position().top - handleSize / 2 + "px",
   });
   handle.prepend($("<img>", { src: "rotate-icon-transparent.png" }).addClass("selected").attr("height", "20px").attr("width", "20px"));
 
@@ -159,12 +164,12 @@ function selectImage() {
 
     window.addEventListener("mousemove", eventMoveHandler, false);
     window.addEventListener(
-      "mouseup",
-      function eventEndHandler() {
-        window.removeEventListener("mousemove", eventMoveHandler, false);
-        window.removeEventListener("mouseup", eventEndHandler);
-      },
-      false
+                            "mouseup",
+                            function eventEndHandler() {
+                              window.removeEventListener("mousemove", eventMoveHandler, false);
+                              window.removeEventListener("mouseup", eventEndHandler);
+                            },
+                            false
     );
   }
 }

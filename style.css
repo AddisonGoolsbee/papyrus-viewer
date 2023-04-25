@@ -44,6 +44,7 @@ h1 {
   background-size: 20px 20px;
   background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
   position: relative;
+  align-self: center;
 }
 
 #imageContainer img {
@@ -74,12 +75,7 @@ h1 {
 }
 
 label {
-  width: 10em;
   display: inline-block;
-}
-
-select {
-  width: 10em;
 }
 
 .rotate-handle {
@@ -136,10 +132,6 @@ select {
   font-family: "Open Sans";
 }
 
-label {
-  padding: 10px;
-}
-
 button {
   margin: 10px;
   background-color: white;
@@ -147,4 +139,48 @@ button {
   /* border: #A5243D; */
   padding: 10px;
   /* color: white; */
+}
+
+#options {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 20px;
+  justify-content: flex-start;
+  font-size: min(18px, 1.5vw);
+  margin-bottom: 30px;
+}
+
+#options > * {
+  padding-right: 20px;
+  border-right: solid black 3px;
+}
+
+#documentSelectorContainer,
+#itemSelectorContainer {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+}
+
+select {
+  font-size: min(18px, 1.5vw);
+  width: 12vw;
+}
+
+#selectorContainer {
+  width: min(28vw, 400px);
+}
+
+#checkboxContainer {
+  display: flex;
+  flex-direction: column;
+  width: min(17vw, 230px);
+}
+
+#enableAnimateContainer,
+#showBackgroundContainer {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
 }

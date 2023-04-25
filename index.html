@@ -29,22 +29,34 @@
         <li class="navbar-item"><a href="aboutpapyrus.html">About Papyrus</a></li>
     </ul>
     <div id="content">
-        <label for="documentSelector">1. Select document:</label>
-        <select id="documentSelector"></select>
-        <br />
-        <label for="itemSelector">2. Select item:</label>
-        <select id="itemSelector"></select>
-        <br />
-        <label for="enableAnimate">Animate fragment flip?</label>
-        <input type="checkbox" id="enableAnimate" checked>
-        <br />
-        <label for="showBackground">Show background?</label>
-        <input type="checkbox" id="showBackground" checked>
-        <br />
-        <button onclick="flipWhole()" id="flipWholeButton">Flip Whole Image</button>
-        <button onclick="loadItem()" id="resetFragments">Reset Fragments</button>
-        <br />
-        <br />
+        <div id="options">
+            <div id="selectorContainer">
+                <div id="documentSelectorContainer">
+                    <label for="documentSelector">Select document:</label>
+                    <select id="documentSelector"></select>
+                </div>
+                <div id="itemSelectorContainer">
+                    <label for="itemSelector">Select document item</label>
+                    <select id="itemSelector"></select>
+                </div>
+            </div>
+            <div id="checkboxContainer">
+                <div id="enableAnimateContainer">
+                    <label for="enableAnimate">Animate fragment flip</label>
+                    <input type="checkbox" id="enableAnimate" checked>
+                </div>
+                <div id="showBackgroundContainer">
+                    <label for="showBackground">Show background</label>
+                    <input type="checkbox" id="showBackground" checked>
+                </div>
+            </div>
+            <div class="buttonContainer">
+                <button onclick="flipWhole()" id="flipWholeButton">Flip Whole Image</button>
+            </div>
+            <div class="buttonContainer">
+                <button onclick="loadItem()" id="resetFragments">Reset Fragments</button>
+            </div>
+        </div>
         <div id="imageContainer">
         </div>
     </div>

@@ -16,9 +16,9 @@
   $.fn.draggablePatched = function (options) {
     options = options || {};
     return this.draggable({
-      cursor: options.cursor || "move",
+      cursor: options.cursor || 'move',
       zIndex: 100,
-      drag: function (event, ui) {
+      drag: function(event, ui) {
         __dx = ui.position.left - ui.originalPosition.left;
         __dy = ui.position.top - ui.originalPosition.top;
         ui.position.left = ui.originalPosition.left + __dx + __recoupLeft;
@@ -27,25 +27,25 @@
           options.drag(event, ui);
         }
       },
-      start: function (event, ui) {
-        var left = parseIntSafe($(this).css("left"));
-        var top = parseIntSafe($(this).css("top"));
+      start: function(event, ui) {
+        var left = parseIntSafe($(this).css('left'));
+        var top = parseIntSafe($(this).css('top'));
         __recoupLeft = left - ui.position.left;
         __recoupTop = top - ui.position.top;
         if (options.start) {
           options.start(event, ui);
         }
       },
-      stop: function (event, ui) {
+      stop: function() {
         if (options.stop) {
-          options.stop(event, ui);
+          options.stop.call(this);
         }
       },
-      create: function (event, ui) {
+      create: function() {
         if (options.create) {
-          options.create(event, ui);
+          options.create.call(this);
         }
-      },
+      }
     });
   };
 })(jQuery);
@@ -111,17 +111,15 @@ function loadFragmentImages(fragments, path) {
   });
 
   $("#imageContainer img").dblclick(fragmentFlip);
-  //console.log('yes container')
 
   $("#imageContainer img").draggablePatched({
     containment: 'img[src$="background.png"]',
-
     start: function () {
-      $(".rotate-handle").remove();
-      $(this).css("border", "2px dashed red");
+     $(".rotate-handle").remove();
+     $(this).css("outline", "2px dashed red");
     },
     stop: function () {
-      $(this).css("border", "none");
+     $(this).css("outline", "none");
     },
   });
   $("#imageContainer img").click(selectImage);
@@ -157,13 +155,20 @@ function selectImage() {
     return;
   }
 
+  if ($(this).hasClass("selected")) {
+    // Deselect this if it's currently selected
+    $("#imageContainer img").css("outline", "none").removeClass("selected");
+    $(".rotate-handle").remove();
+    return;
+  }
+
   $(this).css("z-index", zindex + 1);
   zindex = zindex + 1;
-  // Remove border and selected class from other images
-  $("#imageContainer img").css("border", "none").removeClass("selected");
+  // Remove outline and selected class from other images
+  $("#imageContainer img").css("outline", "none").removeClass("selected");
 
-  // Add border and selected class to selected image
-  $(this).css("border", "2px dashed red").addClass("selected");
+  // Add outline and selected class to selected image
+  $(this).css("outline", "2px dashed red").addClass("selected");
 
   // Remove rotate handle from previously selected image
   $(".rotate-handle").remove();

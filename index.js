@@ -56,20 +56,25 @@ function fragmentFlip() {
   }
 
   let width = $(this).get(0).clientWidth;
-  //console.log(this)
+
   let newSrc = "";
-
-  let duration = $("#enableAnimate").is(":checked") ? 300 : 0;
-
   if ($(this).attr("src").includes("front.png")) {
     newSrc = $(this).attr("src").replace("front.png", "back.png");
   } else {
     newSrc = $(this).attr("src").replace("back.png", "front.png");
   }
-  $(this).animate({ width: "0px", marginLeft: `${width / 2}px` }, duration, "swing", function () {
+
+  if ($("#enableAnimate").is(":checked")) {
+    let duration = 300;
+    $(this).animate({ width: "0px", marginLeft: `${width / 2}px` }, duration, "swing", function () {
+      $(this).attr("src", newSrc);
+      $(this).animate({ width: width, marginLeft: `0px` }, duration, "swing");
+    });
+  } else {
     $(this).attr("src", newSrc);
-    $(this).animate({ width: width, marginLeft: `0px` }, duration, "swing");
-  });
+    $(this).css("width", width);
+  }
+
 }
 
 function loadFragmentImages(fragments, path) {

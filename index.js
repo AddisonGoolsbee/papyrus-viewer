@@ -26,8 +26,14 @@ function loadFragmentImages(fragments, path) {
   if (!$("#showBackground").is(":checked")) {
     bg_img.css("opacity", 0);
   }
+
   $("#imageContainer").append(bg_img);
   bg_img.attr("src", `${path}/fragments/background.png`);
+
+  bg_img.on("load", function () {
+    console.log(bg_img.get(0).naturalWidth);
+    $("#imageContainer").css("width", bg_img.get(0).naturalWidth);
+  });
 
   for (f in fragments) {
     let f_img = $("<img></img>");
@@ -221,25 +227,30 @@ function flipWhole() {
   const imageContainer = document.getElementById("imageContainer");
   const images = imageContainer.querySelectorAll("img");
   const div = imageContainer;
-  const image = div.querySelector('img[src$="background.png"]');
+  const bg_img = div.querySelector('img[src$="background.png"]');
   let width = 0;
 
-  if (image) {
-    width = image.naturalWidth;
+  if (bg_img) {
+    width = bg_img.naturalWidth;
   }
 
   images.forEach(function (image, i) {
     const rect = image.getBoundingClientRect();
+    const imgTop = image.offsetTop;
+    const imgLeft = image.offsetLeft;
+    console.log(image, image.offsetParent, imgTop, imgLeft, rect.top, rect.left, width, rect.width);
     const src = image.getAttribute("src");
     const filename = src.split("/").pop();
 
     if (!(filename == "background.png")) {
       removeRotateHandle(); // Remove the rotate handle before flipping the image
       fragmentFlip.call(image);
-      let cent = rect.left + rect.width / 2;
-      let newcent = width - cent;
-      let newLoc = newcent - rect.width / 2 - 200;
-      image.style.left = `${newLoc}px`;
+      let center = imgLeft + rect.width / 2;
+
+      let newCenter = width - center;
+      let newLeft = newCenter - rect.width / 2;
+      console.log("center: ", center, newCenter, newLeft);
+      image.style.left = `${newLeft}px`;
     }
   });
 }

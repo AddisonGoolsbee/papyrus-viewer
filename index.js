@@ -69,7 +69,7 @@ function fragmentFlip() {
   var filename_full = src.split("/").pop().split('.')[0];
   var filename = filename_full.split('_')[0]
   var side = filename_full.split('_')[1]
-  paragraph.innerHTML = "text of " + side + " side of " + filename + ' is: New text.';
+  paragraph.innerHTML = "text of " + side + " side of " + filename + ' is: Unknown';
   //console.log('new')
 
   if ($("#enableAnimate").is(":checked")) {
@@ -213,7 +213,7 @@ function selectImage() {
   var filename_full = src.split("/").pop().split('.')[0];
   var filename = filename_full.split('_')[0]
   var side = filename_full.split('_')[1]
-  paragraph.innerHTML = "text of " + side + " side of " + filename + ' is: New text.';
+  paragraph.innerHTML = "text of " + side + " side of " + filename + ' is: Unknown';
   //console.log("-change md-")
 
   const box = this;

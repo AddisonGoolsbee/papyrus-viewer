@@ -283,6 +283,10 @@ $(document).ready(function () {
 });
 
 function flipWhole() {
+  $("#flipWholeButton").prop("disabled", true);
+  setTimeout(function () {
+    $("#flipWholeButton").prop("disabled", false);
+  }, 600);
   const imageContainer = document.getElementById("imageContainer");
   const images = imageContainer.querySelectorAll("img");
   const div = imageContainer;

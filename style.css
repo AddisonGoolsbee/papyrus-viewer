@@ -140,6 +140,15 @@ button {
   /* color: white; */
 }
 
+button:hover {
+  box-shadow: 0 5px 5px 0 rgba(0, 0, 0, 0.13), 0 17px 30px 0 rgba(0, 0, 0, 0.07);
+}
+
+button:active {
+  background-color: #ddd;
+  transform: translateY(3px);
+}
+
 #options {
   display: flex;
   flex-direction: row;

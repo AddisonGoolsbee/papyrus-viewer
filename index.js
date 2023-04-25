@@ -316,6 +316,13 @@ $(document).ready(function () {
 });
 
 function flipWhole() {
+    var disableAnimation = 0;
+    if ($("#enableAnimate").is(":checked")) {
+        disableAnimation = 1
+    }
+
+  var checkbox = document.querySelector('#enableAnimate');
+  checkbox.checked = false;
 
   if ($("#enableAnimate").is(":checked")) {
     $("#flipWholeButton").prop("disabled", true);
@@ -351,6 +358,11 @@ function flipWhole() {
       image.style.left = `${newLeft}px`;
     }
   });
+
+  if(disableAnimation){
+    checkbox.checked = true;
+  }
+  
 }
 
 function removeRotateHandle() {

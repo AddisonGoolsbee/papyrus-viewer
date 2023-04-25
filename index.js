@@ -72,7 +72,9 @@ function fragmentFlip() {
     });
   } else {
     $(this).attr("src", newSrc);
-    $(this).css("width", width);
+    $(this).one("load", function() {
+      $(this).css("width", `${width}px`);
+    });
   }
 
 }
@@ -91,7 +93,6 @@ function loadFragmentImages(fragments, path) {
   bg_img.attr("src", `${path}/fragments/background.png`);
 
   bg_img.on("load", function () {
-    console.log(bg_img.get(0).naturalWidth);
     $("#imageContainer").css("width", bg_img.get(0).naturalWidth);
   });
 
@@ -311,7 +312,6 @@ function flipWhole() {
     const rect = image.getBoundingClientRect();
     const imgTop = image.offsetTop;
     const imgLeft = image.offsetLeft;
-    console.log(image, image.offsetParent, imgTop, imgLeft, rect.top, rect.left, width, rect.width);
     const src = image.getAttribute("src");
     const filename = src.split("/").pop();
 
@@ -322,7 +322,6 @@ function flipWhole() {
 
       let newCenter = width - center;
       let newLeft = newCenter - rect.width / 2;
-      console.log("center: ", center, newCenter, newLeft);
       image.style.left = `${newLeft}px`;
     }
   });

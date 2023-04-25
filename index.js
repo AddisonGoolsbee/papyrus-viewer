@@ -194,6 +194,14 @@ function selectImage() {
   let selectedImg = $(".selected");
   let startX, startY, startAngle;
 
+
+  //update metadata
+  var paragraph = document.querySelector('#metadata-fragment');
+  var src = $(this).attr("src")
+  var filename = src.split("/").pop();
+  paragraph.innerHTML = "text of " + filename + ' is: New metadata here.';
+  console.log("-change md-")
+
   const box = this;
   const rotator = handle;
 

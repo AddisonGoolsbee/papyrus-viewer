@@ -264,3 +264,7 @@ select {
     opacity: 100%;
   }
 }
+
+#background {
+  pointer-events: none;
+}

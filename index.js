@@ -67,9 +67,10 @@ function fragmentFlip() {
   var paragraph = document.querySelector('#metadata-fragment');
   var src = newSrc
   var filename_full = src.split("/").pop().split('.')[0];
-  var filename = filename_full.split('_')[0]
+  var fragment_idx = Number(filename_full.split('_')[0].replace("fragment", ""));
+  var filename = "F" + fragment_idx.toString();
   var side = filename_full.split('_')[1]
-  paragraph.innerHTML = "text of " + side + " side of " + filename + ' is: Unknown';
+  paragraph.innerHTML = `${filename}, ${side}: No transcription.`
 
   if ($("#enableAnimate").is(":checked")) {
     let duration = 300;

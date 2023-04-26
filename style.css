@@ -38,9 +38,6 @@ h1 {
 
 #imageContainer {
   width: 100%;
-  background-image: linear-gradient(45deg, #fff 25%, transparent 25%), linear-gradient(-45deg, #fff 25%, transparent 25%), linear-gradient(45deg, transparent 75%, #fff 75%), linear-gradient(-45deg, transparent 75%, #fff 75%);
-  background-size: 20px 20px;
-  background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
   position: relative;
   margin: auto;
 }
@@ -268,3 +265,40 @@ select {
 #background {
   pointer-events: none;
 }
+
+.loader {
+  display: inline-block;
+  border: 5px solid #f3f3f3; /* Light grey */
+  border-top: 5px solid #3498db; /* Blue */
+  border-radius: 50%;
+  width: 0.5em;
+  height: 0.5em;
+  margin: 10px;
+  margin-bottom: 0px;
+  animation: spin 0.5s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.enhanceCloseButton {
+  position: absolute;
+  opacity: 0.8;
+  color:red;
+  font-size: 4em;
+  text-shadow: -1px -1px 0 white, 1px -1px 0 white, -1px 1px 0 white, 1px 1px 0 white;
+  vertical-align: top;
+  line-height:1em;
+}
+
+.enhanceCloseButton:hover {
+  opacity: 1;
+}
+
+html {
+  zoom: 70%;
+}
+
+

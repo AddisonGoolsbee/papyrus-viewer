@@ -10,11 +10,13 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Eczar:wght@500&family=Open+Sans&display=swap" rel="stylesheet">
+    <script type="text/javascript" src="html2canvas.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"
         integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"
         integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30=" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="jquery.zoom.min.js"></script>
     <script src="index.js"></script>
 
 
@@ -66,6 +68,22 @@
             </div>
             <div>
                 <button id="toggleButton">Toggle Magnifying Glass Cursor</button>
+            </div>
+            <div>
+                <label for="enhanceSelector">Enhance:</label>
+                <select id="enhanceSelector" style="width: 8em">
+                    <option value="negative">Invert</option>
+                    <option value="blue">Blue</option>
+                    <option value="vividness">+Vivid</option>
+                    <option value="neg_vividness">-Vivid</option>
+                    <option value="vivid_blue">+VividBlue</option>
+                    <option value="neg_vivid_blue">-VividBlue</option>
+                    <option value="retinex">+Retinex</option>
+                    <option value="neg_retinex">-Retinex</option>
+                    <option value="retinex_blue">+RetinexBlue</option>
+                    <option value="neg_retinex_blue">-RetinexBlue</option>
+                </select>
+                <button id="enhanceButton">Go</button>
             </div>
             <div id="metadata-fragment">
                 <p>Text per fragment here</p>

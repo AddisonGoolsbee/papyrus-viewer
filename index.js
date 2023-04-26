@@ -663,7 +663,7 @@ function enhance() {
     let w = $("#background").width();
     let h = $("#background").height();
 
-    let overlay = $(`<div class="enhanceOverlay" style="width:${w}; height:${h}; position:absolute; z-index:900;"><img src="${orig.toDataURL()}" style="width:100%;height:100%"/></div>`);
+    let overlay = $(`<div class="enhanceOverlay" style="width:${w}; height:${h}; position:absolute; z-index:900;"><img src="${orig.toDataURL()}" style="width:100%;height:100%;" draggable="false"/></div>`);
     $("#imageContainer").append(overlay);
     $("#imageContainer").append(`<div class="enhanceCloseButton" style="position:absolute; top:0px; right:0px; z-index:901" onclick="closeOverlay()">⨂</div>`);
 

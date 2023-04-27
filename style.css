@@ -36,6 +36,24 @@ h1 {
   line-height: 85px;
 }
 
+h2 {
+  font-family: "Eczar";
+}
+
+.text-container {
+  padding-bottom: 20px;
+  padding-left: 100px;
+  padding-right: 100px;
+}
+
+/* dealing with this later lol
+#fragmentInfo {
+  margin: auto;
+  position: relative;
+  padding-left: 20px;
+  padding-right: 20px;
+} */
+
 #imageContainer {
   width: 100%;
   position: relative;

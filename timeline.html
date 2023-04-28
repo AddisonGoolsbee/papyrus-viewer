@@ -1,0 +1,74 @@
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Papyrus Viewer</title>
+        <link rel="stylesheet" href="./style.css">
+        <link rel="icon" href="favicon.png" type="image/x-icon">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Eczar:wght@500&family=Open+Sans&display=swap" rel="stylesheet">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"
+            integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"
+            integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30="
+            crossorigin="anonymous"></script>
+        <script src="https://cdn.anychart.com/releases/8.9.0/js/anychart-core.min.js"></script>
+        <script src="https://cdn.anychart.com/releases/8.9.0/js/anychart-timeline.min.js"></script>
+        <script src="https://cdn.anychart.com/releases/8.9.0/js/anychart-data-adapter.min.js"></script>
+    </head>
+
+    <body>
+        <h1>Papyrus Viewer</h1>
+        <ul class = "navbar">
+            <li class = "navbar-item"><a href="index.html">Home</a></li>
+            <li class="navbar-item"><a href="generalcorpus.html">General Corpus</a></li>
+            <li class="navbar-item"><a href="timeline.html">Timeline</a></li>
+        </ul>
+        <p style="margin:20px;">Note that p_dura_18 is not on this timeline, it is dated to 87 CE, as JavaScript dates have challenges with very old years.</p>
+        <p style="margin:20px;">Hover over a colored bar to see what papryus on the timeline it represents as well as the span of years it is dated to. Use the bar at the bottom to both zoom in (by moving the endpoints) and to pan across the timeline (by dragging the bar from side to side).</p>
+        <div id = "timeline">
+
+        </div>
+        <script>
+            anychart.data.loadJsonFile('timeline.json',
+                function (data) {
+                    console.log(data)
+                    let chart = anychart.timeline();
+
+                    // create the timeline 
+                    for (let i = 0; i < data.timeline_span.length; i++) {
+                        let series = chart.range([
+                            [
+                                data.timeline_span[i].title,
+                                data.timeline_span[i].start,
+                                data.timeline_span[i].end
+
+                            ]
+                        ]);
+                    }
+                    
+                    // chart scale
+                    chart.scale().maximum(Date.UTC(300, 12, 31))
+                    chart.scale().zoomLevels([
+                        [
+                            {unit: 'year', count: 5}
+                        ]
+                    ]);
+
+                    chart.scroller().enabled(true);
+
+                    // draw chart
+                    chart.height("300px");
+                    chart.title("Papyrus Viewer Timeline");
+                    chart.container('timeline');
+                    chart.draw();
+                });
+        </script>
+    </body>
+
+</html>

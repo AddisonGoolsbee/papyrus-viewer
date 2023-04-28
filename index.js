@@ -101,6 +101,8 @@ function loadFragmentImages(fragments, path) {
 
   bg_img.on("load", function () {
     $("#imageContainer").css("width", bg_img.get(0).naturalWidth);
+    $("#imageContainer").css("height", bg_img.get(0).naturalHeight);
+    console.log("Enhancing...");
   });
 
   for (f in fragments) {
@@ -328,6 +330,84 @@ $(document).ready(function () {
     }
   });
 });
+
+function rotateWhole() {
+  const imageContainer = $("#imageContainer");
+  const rotate_button = $("#rotateWholeButton");
+
+  $("#imageContainer img").css("outline", "none").removeClass("selected");
+  $("#imageContainer").css("outline", "none").removeClass("selected");
+
+  // Add outline and selected class to selected image
+  imageContainer.css("outline", "2px dashed red").addClass("selected");
+
+  // Remove rotate handle from previously selected image
+  $(".rotate-handle").remove();
+
+  // $("#background").css("position", "sticky");
+
+  let handle = $("<div class='rotate-handle'></div>");
+  handle.appendTo(rotate_button.parent());
+  let handleSize = handle.outerWidth(true);
+
+  handle.css({
+    left: rotate_button.position().left + rotate_button.outerWidth() / 2 + "px",
+    top: rotate_button.position().top - handleSize / 2 + 80 + "px",
+  });
+  handle.prepend($("<img>", { src: "rotate-icon-transparent.png" }).addClass("selected").attr("height", "20px").attr("width", "20px"));
+
+  
+
+  // Make the rotate handle rotatable by the mouse
+  let selectedImg = $(".selected");
+  let startX, startY, startAngle;
+
+  const rotator = handle;
+
+  handle.on("mousedown", function (e) {
+    e.preventDefault();
+    startX = e.pageX;
+    startY = e.pageY;
+    startAngle = parseInt(selectedImg.data("rotation")) || 0;
+
+    $(document).on("mousemove", rotateImage);
+    $(document).on("mouseup", function () {
+      $(document).off("mousemove", rotateImage);
+    });
+  });
+
+  function rotateBox(deg) {
+    imageContainer.css("transform", "rotate(" + deg + "deg)"); // <=
+  }
+
+  function rotateImage(event) {
+    initX = imageContainer.offsetLeft;
+    initY = imageContainer.offsetTop;
+    mousePressX = event.clientX;
+    mousePressY = event.clientY;
+
+    const arrowRects = document.getElementById("imageContainer").getBoundingClientRect();
+    const arrowX = arrowRects.left + arrowRects.width / 2;
+    const arrowY = arrowRects.top + arrowRects.height / 2;
+
+    function eventMoveHandler(event) {
+      const angle = Math.atan2(event.clientY - arrowY, event.clientX - arrowX) + Math.PI / 2;
+      rotateBox((angle * 180) / Math.PI);
+    }
+
+    window.addEventListener("mousemove", eventMoveHandler, false);
+    window.addEventListener(
+      "mouseup",
+      function eventEndHandler() {
+        window.removeEventListener("mousemove", eventMoveHandler, false);
+        window.removeEventListener("mouseup", eventEndHandler);
+      },
+      false
+    );
+  }
+
+
+}
 
 function flipWhole() {
     var disableAnimation = 0;

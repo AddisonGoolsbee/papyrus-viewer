@@ -51,6 +51,10 @@
 })(jQuery);
 
 function fragmentFlip() {
+  if (abilityToFlip == false)
+  {
+    return;
+  }
   if ($(this).attr("src").includes("background.png")) {
     return;
   }
@@ -86,6 +90,8 @@ function fragmentFlip() {
   }
 }
 
+let abilityToRotate = true;
+let abilityToFlip = true;
 function loadFragmentImages(fragments, path) {
   removeRotateHandle();
   $("#imageContainer img").remove();
@@ -175,14 +181,19 @@ function selectImage() {
         left: $(this).data("origLeft") + 'px',
       });
       $(this).removeData("enlarged");
+      abilityToFlip = true;
     } else {
       // Store original position and size
       var origWidth = $(this).width();
       var origHeight = $(this).height();
       var origTop = $(this).position().top;
       var origLeft = $(this).position().left;
+      
 
       // Enlarge the image
+      abilityToRotate = false;
+      abilityToFlip = false;
+      $(".rotate-handle").remove();
       $(this).css({
         width: origWidth * 2,
         height: origHeight * 2,

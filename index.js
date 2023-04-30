@@ -90,7 +90,6 @@ function fragmentFlip() {
   }
 }
 
-let abilityToRotate = true;
 let abilityToFlip = true;
 function loadFragmentImages(fragments, path) {
   removeRotateHandle();
@@ -191,7 +190,6 @@ function selectImage() {
       
 
       // Enlarge the image
-      abilityToRotate = false;
       abilityToFlip = false;
       $(".rotate-handle").remove();
       $(this).css({

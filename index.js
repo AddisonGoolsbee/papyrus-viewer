@@ -51,6 +51,10 @@
 })(jQuery);
 
 function fragmentFlip() {
+  if (abilityToFlip == false)
+  {
+    return;
+  }
   if ($(this).attr("src").includes("background.png")) {
     return;
   }
@@ -81,6 +85,7 @@ function fragmentFlip() {
   }
 }
 
+
 function updateFragmentText(newSrc){
   
   var paragraph = document.querySelector('#metadata-fragment');
@@ -92,6 +97,9 @@ function updateFragmentText(newSrc){
   paragraph.innerHTML = `${filename}, ${side}: No transcription.`
 }
 
+
+
+let abilityToFlip = true;
 
 function loadFragmentImages(fragments, path) {
   removeRotateHandle();
@@ -184,14 +192,18 @@ function selectImage() {
         left: $(this).data("origLeft") + 'px',
       });
       $(this).removeData("enlarged");
+      abilityToFlip = true;
     } else {
       // Store original position and size
       var origWidth = $(this).width();
       var origHeight = $(this).height();
       var origTop = $(this).position().top;
       var origLeft = $(this).position().left;
+      
 
       // Enlarge the image
+      abilityToFlip = false;
+      $(".rotate-handle").remove();
       $(this).css({
         width: origWidth * 2,
         height: origHeight * 2,

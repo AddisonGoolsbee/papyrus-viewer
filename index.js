@@ -98,6 +98,8 @@ function loadFragmentImages(fragments, path) {
 
   $("#imageContainer").append(bg_img);
   bg_img.attr("src", `${path}/fragments/background.png`);
+  //add seperate container for fragments
+  $("#imageContainer").append('<div id="imageFragmentContainer"></div>');
 
   bg_img.on("load", function () {
     $("#imageContainer").css("width", bg_img.get(0).naturalWidth);
@@ -107,7 +109,8 @@ function loadFragmentImages(fragments, path) {
 
   for (f in fragments) {
     let f_img = $("<img></img>");
-    $("#imageContainer").append(f_img);
+    //$("#imageContainer").append(f_img);
+    $("#imageFragmentContainer").append(f_img);
 
     f_img.css("left", fragments[f].split(",")[0] + "px");
     f_img.css("top", fragments[f].split(",")[1] + "px");
@@ -166,6 +169,7 @@ function loadFragmentImages(fragments, path) {
 }
 
 function selectImage() {
+  console.log((this).parent)
   if ($('body').css('cursor') === 'zoom-in') {
     // Check if the image is already enlarged
     if ($(this).data("enlarged")) {
@@ -332,7 +336,9 @@ $(document).ready(function () {
 });
 
 function rotateWhole() {
-  const imageContainer = $("#imageContainer");
+
+  //const imageContainer = $("#imageContainer");
+  const imageContainer = $("#imageFragmentContainer");
   const rotate_button = $("#rotateWholeButton");
 
   $("#imageContainer img").css("outline", "none").removeClass("selected");
@@ -376,9 +382,15 @@ function rotateWhole() {
     });
   });
 
+
+
+
+
   function rotateBox(deg) {
+
     imageContainer.css("transform", "rotate(" + deg + "deg)"); // <=
   }
+
 
   function rotateImage(event) {
     initX = imageContainer.offsetLeft;

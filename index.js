@@ -95,13 +95,14 @@ let fragment_text = {
   "F6, front" : "__ <br><br><br>______",
   "F7, front" : "l [  ] z<br><br>   cu<br> iuliano<br>aurelius",
   "F8, front" : "[e] nodorus<br><br>[.] trib eq[u]i[<br>ii et crispino cos<br>ualerius",
-  "F9, front" : "",
+  "F9, front" : "blank",
   "F10, front" : "     aurel<br>       s<br>     aurel<br>     aurel<br><br>     aurel<br>Turma rufian<br>     aur<br><br>",
   "F11, front" : "ius zeb<br>[ac] erdote ii cos<br>[iu]s    alexander<br>[ius]  diodorus<br>[iuli]a[no ii] et crispin[o]<br>[iu]s r.....us<br>[l]aeto ii et cere [<br>[elius] . [.] . em . [ ]<br>",
   "F12, front" : "<br><br>s",
 }
 function updateFragmentText(newSrc){
-  
+  document.querySelector('#metadata-fragment').style.fontStyle = "normal";
+
   var paragraph = document.querySelector('#metadata-fragment');
   var src = newSrc
   var filename_full = src.split("/").pop().split('.')[0];
@@ -110,7 +111,14 @@ function updateFragmentText(newSrc){
   var side = filename_full.split('_')[1]
   var text = fragment_text[filename + ", " + side]
   if(text){
-    paragraph.innerHTML = `${filename}, ${side}:<br> ${text} `
+    if(text == "blank"){
+      //console.log('blank')
+      //document.querySelector('#metadata-fragment').style.fontStyle = "italic";
+      paragraph.innerHTML = `${filename}, ${side} is blank `
+    }else{
+      paragraph.innerHTML = `${filename}, ${side}:<br> ${text} `
+    }
+    
   }else{
     paragraph.innerHTML = `${filename}, ${side}: No transcription.`
   }

@@ -86,7 +86,20 @@ function fragmentFlip() {
   }
 }
 
-
+let fragment_text = {
+  "F1, front" : "  ]...[<br>  ]mu[<br>[ ] u [ ] ci [.] [<br> Turma anton prior [ ] iuliano ii et crispin<br>Singul aurel    artemidorus<br> Turma nigrini    iuliano ii et crispin[o]<br>Singul aurel    mocimus<br> Turma germani   cos stip XV",
+  "F2, front" : "o cos<br>    appa<br>cos<br>    Amb",
+  "F3, front" : "Esop [ ] aurelius<br>Tu   antiochi<br>[d]an apolloniu<br>      Cos<br>[u]l   marcus<br>Tu  romulli<br> — aelius",
+  "F4, front" : " a<br> aeto ii et cereale<br>s messenus<br>[st]ip XV<br>uictor<br>[p]ompeiano et au<br>[lici]nnius<br>",
+  "F5, front" : "[c]os<br><br><br><br>[ito] cos<br><br>",
+  "F6, front" : "__ <br><br><br>______",
+  "F7, front" : "l [  ] z<br><br>   cu<br> iuliano<br>aurelius",
+  "F8, front" : "[e] nodorus<br><br>[.] trib eq[u]i[<br>ii et crispino cos<br>ualerius",
+  "F9, front" : "",
+  "F10, front" : "     aurel<br>       s<br>     aurel<br>     aurel<br><br>     aurel<br>Turma rufian<br>     aur<br><br>",
+  "F11, front" : "ius zeb<br>[ac] erdote ii cos<br>[iu]s    alexander<br>[ius]  diodorus<br>[iuli]a[no ii] et crispin[o]<br>[iu]s r.....us<br>[l]aeto ii et cere [<br>[elius] . [.] . em . [ ]<br>",
+  "F12, front" : "<br><br>s",
+}
 function updateFragmentText(newSrc){
   
   var paragraph = document.querySelector('#metadata-fragment');
@@ -95,7 +108,13 @@ function updateFragmentText(newSrc){
   var fragment_idx = Number(filename_full.split('_')[0].replace("fragment", ""));
   var filename = "F" + fragment_idx.toString();
   var side = filename_full.split('_')[1]
-  paragraph.innerHTML = `${filename}, ${side}: No transcription. `
+  var text = fragment_text[filename + ", " + side]
+  if(text){
+    paragraph.innerHTML = `${filename}, ${side}:<br> ${text} `
+  }else{
+    paragraph.innerHTML = `${filename}, ${side}: No transcription.`
+  }
+  
 }
 
 

@@ -245,6 +245,7 @@ function selectImage() {
   zindex = zindex + 1;
   // Remove outline and selected class from other images
   $("#imageContainer img").css("outline", "none").removeClass("selected");
+  $("#imageFragmentContainer").css("outline", "none").removeClass("selected");
 
   // Add outline and selected class to selected image
   $(this).css("outline", "2px dashed red").addClass("selected");
@@ -373,7 +374,7 @@ function rotateWhole() {
   const rotate_button = $("#rotateWholeButton");
 
   $("#imageContainer img").css("outline", "none").removeClass("selected");
-  $("#imageContainer").css("outline", "none").removeClass("selected");
+  $("#imageFragmentContainer").css("outline", "none").removeClass("selected");
 
   // Add outline and selected class to selected image
   imageContainer.css("outline", "2px dashed red").addClass("selected");

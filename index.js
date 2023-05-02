@@ -453,6 +453,26 @@ function rotateWhole() {
 }
 
 function flipWhole() {
+
+ let imageContainer = $("#imageFragmentContainer");
+$("#imageFragmentContainer").css("transform", "scale(-1, 1)");
+
+ /*
+  if ($("#enableAnimate").is(":checked")) {
+    let duration = 300;
+    imageContainer.animate({ width: "0px", marginLeft: `${width / 2}px` }, duration, "swing", function () {
+      imageContainer.attr("src", newSrc);
+      imageContainer.animate({ width: width, marginLeft: `0px` }, duration, "swing");
+    });
+  } else {
+    imageContainer.attr("src", newSrc);
+    imageContainer.one("load", function() {
+      imageContainer.css("width", `${width}px`);
+    });
+  }*/
+
+
+    return
     var disableAnimation = 0;
     if ($("#enableAnimate").is(":checked")) {
         disableAnimation = 1
@@ -468,7 +488,7 @@ function flipWhole() {
     }, 600);
   }
 
-  const imageContainer = document.getElementById("imageContainer");
+  imageContainer = document.getElementById("imageContainer");
   const images = imageContainer.querySelectorAll("img");
   const div = imageContainer;
   const bg_img = div.querySelector('img[src$="background.png"]');

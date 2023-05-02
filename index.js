@@ -89,6 +89,7 @@ function fragmentFlip() {
 function loadFragmentImages(fragments, path) {
   removeRotateHandle();
   $("#imageContainer img").remove();
+  $("#imageFragmentContainer").remove();
 
   let bg_img = $("<img id='background'></img>");
   bg_img.css("zIndex", -1);
@@ -97,11 +98,12 @@ function loadFragmentImages(fragments, path) {
     bg_img.css("opacity", 0);
   }
 
-  $("#imageContainer").append(bg_img);
-  bg_img.attr("src", `${path}/fragments/background.png`);
+  
   //add seperate container for fragments
   $("#imageContainer").append('<div id="imageFragmentContainer"></div>');
   $("#imageFragmentContainer").css("position", "absolute");
+  $("#imageContainer").append(bg_img);
+  bg_img.attr("src", `${path}/fragments/background.png`);
 
   bg_img.on("load", function () {
     $("#imageContainer").css("width", bg_img.get(0).naturalWidth);

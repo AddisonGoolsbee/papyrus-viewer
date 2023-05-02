@@ -94,7 +94,7 @@ function updateFragmentText(newSrc){
   var fragment_idx = Number(filename_full.split('_')[0].replace("fragment", ""));
   var filename = "F" + fragment_idx.toString();
   var side = filename_full.split('_')[1]
-  paragraph.innerHTML = `${filename}, ${side}: No transcription.`
+  paragraph.innerHTML = `${filename}, ${side}: No transcription. `
 }
 
 

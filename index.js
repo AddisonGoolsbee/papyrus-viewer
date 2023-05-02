@@ -51,6 +51,10 @@
 })(jQuery);
 
 function fragmentFlip() {
+  if (abilityToFlip == false)
+  {
+    return;
+  }
   if ($(this).attr("src").includes("background.png")) {
     return;
   }
@@ -63,14 +67,9 @@ function fragmentFlip() {
   } else {
     newSrc = $(this).attr("src").replace("back.png", "front.png");
   }
-  //update text of image
-  var paragraph = document.querySelector('#metadata-fragment');
-  var src = newSrc
-  var filename_full = src.split("/").pop().split('.')[0];
-  var fragment_idx = Number(filename_full.split('_')[0].replace("fragment", ""));
-  var filename = "F" + fragment_idx.toString();
-  var side = filename_full.split('_')[1]
-  paragraph.innerHTML = `${filename}, ${side}: No transcription.`
+
+  updateFragmentText(newSrc)
+  
 
   if ($("#enableAnimate").is(":checked")) {
     let duration = 300;
@@ -85,6 +84,22 @@ function fragmentFlip() {
     });
   }
 }
+
+
+function updateFragmentText(newSrc){
+  
+  var paragraph = document.querySelector('#metadata-fragment');
+  var src = newSrc
+  var filename_full = src.split("/").pop().split('.')[0];
+  var fragment_idx = Number(filename_full.split('_')[0].replace("fragment", ""));
+  var filename = "F" + fragment_idx.toString();
+  var side = filename_full.split('_')[1]
+  paragraph.innerHTML = `${filename}, ${side}: No transcription.`
+}
+
+
+
+let abilityToFlip = true;
 
 function loadFragmentImages(fragments, path) {
   removeRotateHandle();
@@ -176,7 +191,12 @@ function loadFragmentImages(fragments, path) {
 }
 
 function selectImage() {
+
   console.log((this).parent)
+
+  
+  updateFragmentText($(this).attr("src"))
+
   if ($('body').css('cursor') === 'zoom-in') {
     // Check if the image is already enlarged
     if ($(this).data("enlarged")) {
@@ -188,14 +208,18 @@ function selectImage() {
         left: $(this).data("origLeft") + 'px',
       });
       $(this).removeData("enlarged");
+      abilityToFlip = true;
     } else {
       // Store original position and size
       var origWidth = $(this).width();
       var origHeight = $(this).height();
       var origTop = $(this).position().top;
       var origLeft = $(this).position().left;
+      
 
       // Enlarge the image
+      abilityToFlip = false;
+      $(".rotate-handle").remove();
       $(this).css({
         width: origWidth * 2,
         height: origHeight * 2,

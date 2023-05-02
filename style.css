@@ -315,4 +315,6 @@ select {
   opacity: 1;
 }
 
-
+#timeline  {
+  height: 50%;
+}

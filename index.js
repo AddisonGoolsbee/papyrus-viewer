@@ -92,6 +92,7 @@ function loadFragmentImages(fragments, path) {
 
   let bg_img = $("<img id='background'></img>");
   bg_img.css("zIndex", -1);
+  bg_img.css("position", "relative");
   if (!$("#showBackground").is(":checked")) {
     bg_img.css("opacity", 0);
   }
@@ -100,10 +101,14 @@ function loadFragmentImages(fragments, path) {
   bg_img.attr("src", `${path}/fragments/background.png`);
   //add seperate container for fragments
   $("#imageContainer").append('<div id="imageFragmentContainer"></div>');
+  $("#imageFragmentContainer").css("position", "absolute");
 
   bg_img.on("load", function () {
     $("#imageContainer").css("width", bg_img.get(0).naturalWidth);
     $("#imageContainer").css("height", bg_img.get(0).naturalHeight);
+    $("#imageFragmentContainer").css("height", bg_img.get(0).naturalHeight);
+    $("#imageFragmentContainer").css("width", bg_img.get(0).naturalWidth);
+
     console.log("Enhancing...");
   });
 
@@ -398,7 +403,7 @@ function rotateWhole() {
     mousePressX = event.clientX;
     mousePressY = event.clientY;
 
-    const arrowRects = document.getElementById("imageContainer").getBoundingClientRect();
+    const arrowRects = document.getElementById("imageFragmentContainer").getBoundingClientRect();
     const arrowX = arrowRects.left + arrowRects.width / 2;
     const arrowY = arrowRects.top + arrowRects.height / 2;
 

@@ -372,6 +372,8 @@ function rotateWhole() {
   const imageContainer = $("#imageFragmentContainer");
   const rotate_button = $("#rotateWholeButton");
 
+  imageContainer.css("transition", "");
+
   $("#imageContainer img").css("outline", "none").removeClass("selected");
   $("#imageContainer").css("outline", "none").removeClass("selected");
 
@@ -419,7 +421,8 @@ function rotateWhole() {
 
   function rotateBox(deg) {
 
-    imageContainer.css("transform", "rotate(" + deg + "deg)"); // <=
+    imageContainer.css("transform", "rotate(" + deg + "deg)"); 
+
   }
 
 
@@ -451,12 +454,43 @@ function rotateWhole() {
 
 
 }
+let isFlipped = false;
+
+
+function animatePossibleFlipWhole(){
+  let imageContainer = $("#imageFragmentContainer");
+//$("#imageFragmentContainer").css("transform", "scale(-1, 1)");
+  
+
+if ($("#enableAnimate").is(":checked")) {
+  imageContainer.css("transition", "transform 0.3s ease-in-out");
+} else{
+  imageContainer.css("transition", "");
+}
+if (!isFlipped) {
+  imageContainer.css("transform", "scale(-1, 1)");
+  isFlipped = true;
+} else {
+  imageContainer.css("transform", "scale(1, 1)");
+  isFlipped = false;
+}
+
+
+
+}
 
 function flipWhole() {
-
- let imageContainer = $("#imageFragmentContainer");
-$("#imageFragmentContainer").css("transform", "scale(-1, 1)");
-
+animatePossibleFlipWhole()
+ 
+return
+/*console.log('bef')
+ $("#imageFragmentContainer").animate({ 
+  scaleX: "-1",
+  scaleY: "1"
+}, 300);
+console.log('really?!')
+return
+*/
  /*
   if ($("#enableAnimate").is(":checked")) {
     let duration = 300;
@@ -472,7 +506,7 @@ $("#imageFragmentContainer").css("transform", "scale(-1, 1)");
   }*/
 
 
-    return
+    
     var disableAnimation = 0;
     if ($("#enableAnimate").is(":checked")) {
         disableAnimation = 1

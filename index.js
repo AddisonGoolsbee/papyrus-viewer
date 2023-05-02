@@ -16,6 +16,7 @@
   $.fn.draggablePatched = function (options) {
     options = options || {};
     return this.draggable({
+      containment: 'img[src$="background.png"]',
       cursor: options.cursor || 'move',
       zIndex: 100,
       drag: function(event, ui) {
@@ -139,9 +140,11 @@ function loadFragmentImages(fragments, path) {
   });
 
   $("#imageContainer img").dblclick(fragmentFlip);
-
+console.log('log')
   $("#imageContainer img").draggablePatched({
-    containment: 'img[src$="background.png"]',
+    //containment: 'img[src$="background.png"]',
+
+    
     start: function () {
      $(".rotate-handle").remove();
      $(this).css("outline", "2px dashed red");

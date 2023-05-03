@@ -318,3 +318,10 @@ select {
 #timeline  {
   height: 50%;
 }
+
+#metadata-fragment {
+    overflow: auto;
+    width: 20em;
+    height: 6em;
+}
+

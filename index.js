@@ -110,7 +110,10 @@ function updateFragmentText(newSrc){
   var filename = "F" + fragment_idx.toString();
   var side = filename_full.split('_')[1]
   var text = fragment_text[filename + ", " + side]
-  if(text){
+  let doc = $("#documentSelector option:selected").val();
+  let item = Number($("#itemSelector option:selected").val()).toString().padStart(2, "0");
+  let path = `documents/${doc}/${item}`;
+  if(text &&  path == "documents/p.dura_116/01"){
     if(text == "blank"){
       //console.log('blank')
       //document.querySelector('#metadata-fragment').style.fontStyle = "italic";
@@ -130,6 +133,7 @@ function updateFragmentText(newSrc){
 let abilityToFlip = true;
 
 function loadFragmentImages(fragments, path) {
+  console.log("now")
   removeRotateHandle();
   $("#imageContainer img").remove();
 
@@ -332,7 +336,7 @@ function loadItem() {
   let doc = $("#documentSelector option:selected").val();
   let item = Number($("#itemSelector option:selected").val()).toString().padStart(2, "0");
   let path = `documents/${doc}/${item}`;
-
+  console.log(path)
   fetch(path + "/fragments/fragments.json")
     .then((response) => response.json())
     .then((data) => {

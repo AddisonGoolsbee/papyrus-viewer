@@ -69,6 +69,9 @@ function fragmentFlip() {
 
   updateFragmentText(newSrc);
 
+  const left = $(this).css("left");
+  const top = $(this).css("top");
+
   if ($("#enableAnimate").is(":checked")) {
     let duration = 300;
     $(this).animate({ width: "0px", marginLeft: `${width / 2}px` }, duration, "swing", function () {
@@ -81,6 +84,11 @@ function fragmentFlip() {
       $(this).css("width", `${width}px`);
     });
   }
+
+  $(this).one("load", function () {
+    $(this).css("left", left);
+    $(this).css("top", top);
+  });
 }
 
 let fragment_text = {

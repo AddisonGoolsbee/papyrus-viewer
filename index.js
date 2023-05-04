@@ -56,7 +56,6 @@ function fragmentFlip() {
   }
 
   let width = $(this).get(0).clientWidth;
-  //console.log(this)
   let newSrc = "";
 
   let duration = $("#enableAnimate").is(":checked") ? 300 : 0;
@@ -72,43 +71,49 @@ function fragmentFlip() {
   });
 }
 
-function loadFragmentImages(fragments, path) {
-  removeRotateHandle();
-  let resize = 0;
-  $("#imageContainer img").remove();
+function loadBackground(path) {
+  return new Promise((resolve, reject) => {
+    removeRotateHandle();
+    $("#imageContainer img").remove();
 
-  let bg_img = $("<img id='background'></img>");
-  bg_img.css("zIndex", -1);
-  if (!$("#showBackground").is(":checked")) {
-    bg_img.css("opacity", 0);
-  }
+    let bg_img = $("<img id='background'></img>");
+    bg_img.css("zIndex", -1);
+    if (!$("#showBackground").is(":checked")) {
+      bg_img.css("opacity", 0);
+    }
+    $("#imageContainer").append(bg_img);
+    bg_img.attr("src", `${path}/fragments/background.png`);
 
-  $("#imageContainer").append(bg_img);
-  bg_img.attr("src", `${path}/fragments/background.png`);
+    bg_img.on("load", function () {
+      const resizedWindowHeight = window.innerHeight * 0.75;
+      let temp = bg_img.css("height");
+      temp = temp.replace(/\D/g, "");
 
-  bg_img.on("load", function () {
-    const resizedWindowHeight = window.innerHeight * 0.75;
-    console.log($("#imageContainer").css("height"), resizedWindowHeight, window.innerHeight);
-    let temp = bg_img.css("height");
-    temp = temp.replace(/\D/g, "");
+      const resize = resizedWindowHeight / temp;
 
-    resize = resizedWindowHeight / temp;
-
-    bg_img.css("height", `${temp * resize}`);
-    console.log(bg_img.css("width"));
-    $("#imageContainer").css("width", bg_img.css("width"));
+      bg_img.css("height", `${temp * resize}`);
+      $("#imageContainer").css("width", bg_img.css("width"));
+      resolve(resize);
+    });
+    bg_img.onerror = reject;
   });
+}
 
+function loadFragmentImages(fragments, path, resize) {
   for (f in fragments) {
     let f_img = $("<img></img>");
     $("#imageContainer").append(f_img);
+
+    const left = parseInt(fragments[f].split(",")[0]);
+    const top = parseInt(fragments[f].split(",")[1]);
 
     f_img.css("left", fragments[f].split(",")[0] + "px");
     f_img.css("top", fragments[f].split(",")[1] + "px");
 
     f_img.on("load", function () {
-      $(this).css("width", $(this).get(0).naturalWidth);
-      $(this).css("height", $(this).get(0).naturalHeight);
+      $(this).css("width", $(this).get(0).naturalWidth * resize);
+      f_img.css("left", left * resize + "px");
+      f_img.css("top", top * resize + "px");
     });
     f_img.attr("src", `${path}/fragments/${f}_front.png`);
   }
@@ -251,8 +256,9 @@ function loadItem() {
 
   fetch(path + "/fragments/fragments.json")
     .then((response) => response.json())
-    .then((data) => {
-      loadFragmentImages(data, path);
+    .then(async (data) => {
+      let resize = await loadBackground(path);
+      loadFragmentImages(data, path, resize);
     });
 }
 
@@ -297,9 +303,6 @@ $(document).ready(function () {
 });
 
 function flipWhole() {
-  console.log($("#imageContainer").height, window.innerHeight, window.innerHeight * 0.85, window.innerWidth);
-
-  return;
   $("#flipWholeButton").prop("disabled", true);
   setTimeout(function () {
     $("#flipWholeButton").prop("disabled", false);
@@ -318,7 +321,6 @@ function flipWhole() {
     const rect = image.getBoundingClientRect();
     const imgTop = image.offsetTop;
     const imgLeft = image.offsetLeft;
-    console.log(image, image.offsetParent, imgTop, imgLeft, rect.top, rect.left, width, rect.width);
     const src = image.getAttribute("src");
     const filename = src.split("/").pop();
 
@@ -329,7 +331,6 @@ function flipWhole() {
 
       let newCenter = width - center;
       let newLeft = newCenter - rect.width / 2;
-      console.log("center: ", center, newCenter, newLeft);
       image.style.left = `${newLeft}px`;
     }
   });

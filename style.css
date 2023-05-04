@@ -43,7 +43,6 @@ h1 {
   background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
   position: relative;
   margin: auto;
-  border: 3px red solid;
   height: 75vh;
 }
 

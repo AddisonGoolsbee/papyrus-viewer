@@ -17,9 +17,9 @@
     options = options || {};
     return this.draggable({
       containment: 'img[src$="background.png"]',
-      cursor: options.cursor || 'move',
+      cursor: options.cursor || "move",
       zIndex: 100,
-      drag: function(event, ui) {
+      drag: function (event, ui) {
         __dx = ui.position.left - ui.originalPosition.left;
         __dy = ui.position.top - ui.originalPosition.top;
         ui.position.left = ui.originalPosition.left + __dx + __recoupLeft;
@@ -28,32 +28,31 @@
           options.drag(event, ui);
         }
       },
-      start: function(event, ui) {
-        var left = parseIntSafe($(this).css('left'));
-        var top = parseIntSafe($(this).css('top'));
+      start: function (event, ui) {
+        var left = parseIntSafe($(this).css("left"));
+        var top = parseIntSafe($(this).css("top"));
         __recoupLeft = left - ui.position.left;
         __recoupTop = top - ui.position.top;
         if (options.start) {
           options.start(event, ui);
         }
       },
-      stop: function() {
+      stop: function () {
         if (options.stop) {
           options.stop.call(this);
         }
       },
-      create: function() {
+      create: function () {
         if (options.create) {
           options.create.call(this);
         }
-      }
+      },
     });
   };
 })(jQuery);
 
 function fragmentFlip() {
-  if (abilityToFlip == false)
-  {
+  if (abilityToFlip == false) {
     return;
   }
   if ($(this).attr("src").includes("background.png")) {
@@ -61,7 +60,6 @@ function fragmentFlip() {
   }
 
   let width = $(this).get(0).clientWidth;
-
   let newSrc = "";
   if ($(this).attr("src").includes("front.png")) {
     newSrc = $(this).attr("src").replace("front.png", "back.png");
@@ -69,8 +67,7 @@ function fragmentFlip() {
     newSrc = $(this).attr("src").replace("back.png", "front.png");
   }
 
-  updateFragmentText(newSrc)
-  
+  updateFragmentText(newSrc);
 
   if ($("#enableAnimate").is(":checked")) {
     let duration = 300;
@@ -80,87 +77,97 @@ function fragmentFlip() {
     });
   } else {
     $(this).attr("src", newSrc);
-    $(this).one("load", function() {
+    $(this).one("load", function () {
       $(this).css("width", `${width}px`);
     });
   }
 }
 
 let fragment_text = {
-  "F1, front" : "  ]...[<br>  ]mu[<br>[ ] u [ ] ci [.] [<br> Turma anton prior [ ] iuliano ii et crispin<br>Singul aurel    artemidorus<br> Turma nigrini    iuliano ii et crispin[o]<br>Singul aurel    mocimus<br> Turma germani   cos stip XV",
-  "F2, front" : "o cos<br>    appa<br>cos<br>    Amb",
-  "F3, front" : "Esop [ ] aurelius<br>Tu   antiochi<br>[d]an apolloniu<br>      Cos<br>[u]l   marcus<br>Tu  romulli<br> — aelius",
-  "F4, front" : " a<br> aeto ii et cereale<br>s messenus<br>[st]ip XV<br>uictor<br>[p]ompeiano et au<br>[lici]nnius<br>",
-  "F5, front" : "[c]os<br><br><br><br>[ito] cos<br><br>",
-  "F6, front" : "__ <br><br><br>______",
-  "F7, front" : "l [  ] z<br><br>   cu<br> iuliano<br>aurelius",
-  "F8, front" : "[e] nodorus<br><br>[.] trib eq[u]i[<br>ii et crispino cos<br>ualerius",
-  "F9, front" : "blank",
-  "F10, front" : "     aurel<br>       s<br>     aurel<br>     aurel<br><br>     aurel<br>Turma rufian<br>     aur<br><br>",
-  "F11, front" : "ius zeb<br>[ac] erdote ii cos<br>[iu]s    alexander<br>[ius]  diodorus<br>[iuli]a[no ii] et crispin[o]<br>[iu]s r.....us<br>[l]aeto ii et cere [<br>[elius] . [.] . em . [ ]<br>",
-  "F12, front" : "<br><br>s",
-}
-function updateFragmentText(newSrc){
-  document.querySelector('#metadata-fragment').style.fontStyle = "normal";
+  "F1, front": "  ]...[<br>  ]mu[<br>[ ] u [ ] ci [.] [<br> Turma anton prior [ ] iuliano ii et crispin<br>Singul aurel    artemidorus<br> Turma nigrini    iuliano ii et crispin[o]<br>Singul aurel    mocimus<br> Turma germani   cos stip XV",
+  "F2, front": "o cos<br>    appa<br>cos<br>    Amb",
+  "F3, front": "Esop [ ] aurelius<br>Tu   antiochi<br>[d]an apolloniu<br>      Cos<br>[u]l   marcus<br>Tu  romulli<br> — aelius",
+  "F4, front": " a<br> aeto ii et cereale<br>s messenus<br>[st]ip XV<br>uictor<br>[p]ompeiano et au<br>[lici]nnius<br>",
+  "F5, front": "[c]os<br><br><br><br>[ito] cos<br><br>",
+  "F6, front": "__ <br><br><br>______",
+  "F7, front": "l [  ] z<br><br>   cu<br> iuliano<br>aurelius",
+  "F8, front": "[e] nodorus<br><br>[.] trib eq[u]i[<br>ii et crispino cos<br>ualerius",
+  "F9, front": "blank",
+  "F10, front": "     aurel<br>       s<br>     aurel<br>     aurel<br><br>     aurel<br>Turma rufian<br>     aur<br><br>",
+  "F11, front": "ius zeb<br>[ac] erdote ii cos<br>[iu]s    alexander<br>[ius]  diodorus<br>[iuli]a[no ii] et crispin[o]<br>[iu]s r.....us<br>[l]aeto ii et cere [<br>[elius] . [.] . em . [ ]<br>",
+  "F12, front": "<br><br>s",
+};
+function updateFragmentText(newSrc) {
+  document.querySelector("#metadata-fragment").style.fontStyle = "normal";
 
-  var paragraph = document.querySelector('#metadata-fragment');
-  var src = newSrc
-  var filename_full = src.split("/").pop().split('.')[0];
-  var fragment_idx = Number(filename_full.split('_')[0].replace("fragment", ""));
+  var paragraph = document.querySelector("#metadata-fragment");
+  var src = newSrc;
+  var filename_full = src.split("/").pop().split(".")[0];
+  var fragment_idx = Number(filename_full.split("_")[0].replace("fragment", ""));
   var filename = "F" + fragment_idx.toString();
-  var side = filename_full.split('_')[1]
-  var text = fragment_text[filename + ", " + side]
+  var side = filename_full.split("_")[1];
+  var text = fragment_text[filename + ", " + side];
   let doc = $("#documentSelector option:selected").val();
   let item = Number($("#itemSelector option:selected").val()).toString().padStart(2, "0");
   let path = `documents/${doc}/${item}`;
-  if(text &&  path == "documents/p.dura_116/01"){
-    if(text == "blank"){
+  if (text && path == "documents/p.dura_116/01") {
+    if (text == "blank") {
       //console.log('blank')
       //document.querySelector('#metadata-fragment').style.fontStyle = "italic";
-      paragraph.innerHTML = `${filename}, ${side} is blank `
-    }else{
-      paragraph.innerHTML = `${filename}, ${side}:<br> ${text} `
+      paragraph.innerHTML = `${filename}, ${side} is blank `;
+    } else {
+      paragraph.innerHTML = `${filename}, ${side}:<br> ${text} `;
     }
-    
-  }else{
-    paragraph.innerHTML = `${filename}, ${side}: No transcription.`
+  } else {
+    paragraph.innerHTML = `${filename}, ${side}: No transcription.`;
   }
-  
 }
-
-
 
 let abilityToFlip = true;
 
-function loadFragmentImages(fragments, path) {
-  console.log("now")
-  removeRotateHandle();
-  $("#imageContainer img").remove();
+function loadBackground(path) {
+  return new Promise((resolve, reject) => {
+    removeRotateHandle();
+    $("#imageContainer img").remove();
 
-  let bg_img = $("<img id='background'></img>");
-  bg_img.css("zIndex", -1);
-  if (!$("#showBackground").is(":checked")) {
-    bg_img.css("opacity", 0);
-  }
+    let bg_img = $("<img id='background'></img>");
+    bg_img.css("zIndex", -1);
+    if (!$("#showBackground").is(":checked")) {
+      bg_img.css("opacity", 0);
+    }
+    $("#imageContainer").append(bg_img);
+    bg_img.attr("src", `${path}/fragments/background.png`);
 
-  $("#imageContainer").append(bg_img);
-  bg_img.attr("src", `${path}/fragments/background.png`);
+    bg_img.on("load", function () {
+      const resizedWindowHeight = window.innerHeight * 0.75;
+      let temp = bg_img.css("height");
+      temp = temp.replace(/\D/g, "");
 
-  bg_img.on("load", function () {
-    $("#imageContainer").css("width", bg_img.get(0).naturalWidth);
-    $("#imageContainer").css("height", $("#background").height());
+      const resize = resizedWindowHeight / temp;
+
+      bg_img.css("height", `${temp * resize}`);
+      $("#imageContainer").css("width", bg_img.css("width"));
+      resolve(resize);
+    });
+    bg_img.onerror = reject;
   });
+}
 
+function loadFragmentImages(fragments, path, resize) {
   for (f in fragments) {
     let f_img = $("<img></img>");
     $("#imageContainer").append(f_img);
+
+    const left = parseInt(fragments[f].split(",")[0]);
+    const top = parseInt(fragments[f].split(",")[1]);
 
     f_img.css("left", fragments[f].split(",")[0] + "px");
     f_img.css("top", fragments[f].split(",")[1] + "px");
 
     f_img.on("load", function () {
-      $(this).css("width", $(this).get(0).naturalWidth);
-      $(this).css("height", $(this).get(0).naturalHeight);
+      $(this).css("width", $(this).get(0).naturalWidth * resize);
+      f_img.css("left", left * resize + "px");
+      f_img.css("top", top * resize + "px");
     });
     f_img.attr("src", `${path}/fragments/${f}_front.png`);
   }
@@ -172,17 +179,16 @@ function loadFragmentImages(fragments, path) {
   });
 
   $("#imageContainer img").dblclick(fragmentFlip);
-console.log('log')
+  console.log("log");
   $("#imageContainer img").draggablePatched({
     //containment: 'img[src$="background.png"]',
 
-    
     start: function () {
-     $(".rotate-handle").remove();
-     $(this).css("outline", "2px dashed red");
+      $(".rotate-handle").remove();
+      $(this).css("outline", "2px dashed red");
     },
     stop: function () {
-     $(this).css("outline", "none");
+      $(this).css("outline", "none");
     },
   });
   $("#imageContainer img").click(selectImage);
@@ -214,17 +220,16 @@ console.log('log')
 }
 
 function selectImage() {
-  
-  updateFragmentText($(this).attr("src"))
-  if ($('body').css('cursor') === 'zoom-in') {
+  updateFragmentText($(this).attr("src"));
+  if ($("body").css("cursor") === "zoom-in") {
     // Check if the image is already enlarged
     if ($(this).data("enlarged")) {
       $(this).css({
         width: $(this).data("origWidth"),
         height: $(this).data("origHeight"),
-        position: 'absolute',
-        top: $(this).data("origTop") + 'px',
-        left: $(this).data("origLeft") + 'px',
+        position: "absolute",
+        top: $(this).data("origTop") + "px",
+        left: $(this).data("origLeft") + "px",
       });
       $(this).removeData("enlarged");
       abilityToFlip = true;
@@ -234,7 +239,6 @@ function selectImage() {
       var origHeight = $(this).height();
       var origTop = $(this).position().top;
       var origLeft = $(this).position().left;
-      
 
       // Enlarge the image
       abilityToFlip = false;
@@ -242,9 +246,9 @@ function selectImage() {
       $(this).css({
         width: origWidth * 2,
         height: origHeight * 2,
-        position: 'absolute',
-        top: origTop - origHeight / 2 + 'px',
-        left: origLeft - origWidth / 2 + 'px',
+        position: "absolute",
+        top: origTop - origHeight / 2 + "px",
+        left: origLeft - origWidth / 2 + "px",
       });
       $(this).data({
         enlarged: true,
@@ -337,17 +341,17 @@ function loadItem() {
   let doc = $("#documentSelector option:selected").val();
   let item = Number($("#itemSelector option:selected").val()).toString().padStart(2, "0");
   let path = `documents/${doc}/${item}`;
-  console.log(path)
+  console.log(path);
   fetch(path + "/fragments/fragments.json")
     .then((response) => response.json())
-    .then((data) => {
-      loadFragmentImages(data, path);
+    .then(async (data) => {
+      let resize = await loadBackground(path);
+      loadFragmentImages(data, path, resize);
     });
 
   if (path == "documents/p.dura_116/01") {
     document.getElementById("papyri-info").style.display = "block";
-  }
-  else {
+  } else {
     document.getElementById("papyri-info").style.display = "none";
   }
 }
@@ -393,12 +397,12 @@ $(document).ready(function () {
 });
 
 function flipWhole() {
-    var disableAnimation = 0;
-    if ($("#enableAnimate").is(":checked")) {
-        disableAnimation = 1
-    }
+  var disableAnimation = 0;
+  if ($("#enableAnimate").is(":checked")) {
+    disableAnimation = 1;
+  }
 
-  var checkbox = document.querySelector('#enableAnimate');
+  var checkbox = document.querySelector("#enableAnimate");
   checkbox.checked = false;
 
   if ($("#enableAnimate").is(":checked")) {
@@ -436,7 +440,7 @@ function flipWhole() {
     }
   });
 
-  if(disableAnimation){
+  if (disableAnimation) {
     checkbox.checked = true;
   }
 }
@@ -445,51 +449,51 @@ function removeRotateHandle() {
   $(".rotate-handle").remove();
 }
 
-function lab2rgb(lab){
+function lab2rgb(lab) {
   var y = (lab[0] + 16) / 116,
     x = lab[1] / 500 + y,
     z = y - lab[2] / 200,
-    r, g, b;
+    r,
+    g,
+    b;
 
-  x = 0.95047 * ((x * x * x > 0.008856) ? x * x * x : (x - 16/116) / 7.787);
-  y = 1.00000 * ((y * y * y > 0.008856) ? y * y * y : (y - 16/116) / 7.787);
-  z = 1.08883 * ((z * z * z > 0.008856) ? z * z * z : (z - 16/116) / 7.787);
+  x = 0.95047 * (x * x * x > 0.008856 ? x * x * x : (x - 16 / 116) / 7.787);
+  y = 1.0 * (y * y * y > 0.008856 ? y * y * y : (y - 16 / 116) / 7.787);
+  z = 1.08883 * (z * z * z > 0.008856 ? z * z * z : (z - 16 / 116) / 7.787);
 
-  r = x *  3.2406 + y * -1.5372 + z * -0.4986;
-  g = x * -0.9689 + y *  1.8758 + z *  0.0415;
-  b = x *  0.0557 + y * -0.2040 + z *  1.0570;
+  r = x * 3.2406 + y * -1.5372 + z * -0.4986;
+  g = x * -0.9689 + y * 1.8758 + z * 0.0415;
+  b = x * 0.0557 + y * -0.204 + z * 1.057;
 
-  r = (r > 0.0031308) ? (1.055 * Math.pow(r, 1/2.4) - 0.055) : 12.92 * r;
-  g = (g > 0.0031308) ? (1.055 * Math.pow(g, 1/2.4) - 0.055) : 12.92 * g;
-  b = (b > 0.0031308) ? (1.055 * Math.pow(b, 1/2.4) - 0.055) : 12.92 * b;
+  r = r > 0.0031308 ? 1.055 * Math.pow(r, 1 / 2.4) - 0.055 : 12.92 * r;
+  g = g > 0.0031308 ? 1.055 * Math.pow(g, 1 / 2.4) - 0.055 : 12.92 * g;
+  b = b > 0.0031308 ? 1.055 * Math.pow(b, 1 / 2.4) - 0.055 : 12.92 * b;
 
-  return [Math.max(0, Math.min(1, r)) * 255,
-    Math.max(0, Math.min(1, g)) * 255,
-    Math.max(0, Math.min(1, b)) * 255]
+  return [Math.max(0, Math.min(1, r)) * 255, Math.max(0, Math.min(1, g)) * 255, Math.max(0, Math.min(1, b)) * 255];
 }
 
-
-function rgb2lab(rgb){
+function rgb2lab(rgb) {
   var r = rgb[0] / 255,
     g = rgb[1] / 255,
     b = rgb[2] / 255,
-    x, y, z;
+    x,
+    y,
+    z;
 
-  r = (r > 0.04045) ? Math.pow((r + 0.055) / 1.055, 2.4) : r / 12.92;
-  g = (g > 0.04045) ? Math.pow((g + 0.055) / 1.055, 2.4) : g / 12.92;
-  b = (b > 0.04045) ? Math.pow((b + 0.055) / 1.055, 2.4) : b / 12.92;
+  r = r > 0.04045 ? Math.pow((r + 0.055) / 1.055, 2.4) : r / 12.92;
+  g = g > 0.04045 ? Math.pow((g + 0.055) / 1.055, 2.4) : g / 12.92;
+  b = b > 0.04045 ? Math.pow((b + 0.055) / 1.055, 2.4) : b / 12.92;
 
   x = (r * 0.4124 + g * 0.3576 + b * 0.1805) / 0.95047;
-  y = (r * 0.2126 + g * 0.7152 + b * 0.0722) / 1.00000;
+  y = (r * 0.2126 + g * 0.7152 + b * 0.0722) / 1.0;
   z = (r * 0.0193 + g * 0.1192 + b * 0.9505) / 1.08883;
 
-  x = (x > 0.008856) ? Math.pow(x, 1/3) : (7.787 * x) + 16/116;
-  y = (y > 0.008856) ? Math.pow(y, 1/3) : (7.787 * y) + 16/116;
-  z = (z > 0.008856) ? Math.pow(z, 1/3) : (7.787 * z) + 16/116;
+  x = x > 0.008856 ? Math.pow(x, 1 / 3) : 7.787 * x + 16 / 116;
+  y = y > 0.008856 ? Math.pow(y, 1 / 3) : 7.787 * y + 16 / 116;
+  z = z > 0.008856 ? Math.pow(z, 1 / 3) : 7.787 * z + 16 / 116;
 
-  return [(116 * y) - 16, 500 * (x - y), 200 * (y - z)]
+  return [116 * y - 16, 500 * (x - y), 200 * (y - z)];
 }
-
 
 function enhanceVividness(imageData, negative) {
   const width = imageData.width;
@@ -523,7 +527,6 @@ function enhanceVividness(imageData, negative) {
     if (L < minVividness) {
       minVividness = L;
     }
-
   }
 
   // Loop over every pixel
@@ -544,7 +547,7 @@ function enhanceVividness(imageData, negative) {
     }
 
     // Scale to bounds
-    L = ( (L - minVividness)/(maxVividness - minVividness) ) * 100;
+    L = ((L - minVividness) / (maxVividness - minVividness)) * 100;
 
     // Convert LAB back to RGB
     const [rOut, gOut, bOut] = lab2rgb([L, A, B]);
@@ -594,7 +597,7 @@ function invert(imageData) {
   const data = imageData.data;
 
   for (let i = 0; i < data.length; i += 4) {
-    data[i] = 255 - data[i];         // invert red
+    data[i] = 255 - data[i]; // invert red
     data[i + 1] = 255 - data[i + 1]; // invert green
     data[i + 2] = 255 - data[i + 2]; // invert blue
   }
@@ -674,7 +677,6 @@ function retinex(imageData, sigma, gain, offset) {
   return new ImageData(data, width, height);
 }
 
-
 function closeOverlay() {
   $(".enhanceOverlay").remove();
   $(".enhanceCloseButton").remove();
@@ -682,14 +684,15 @@ function closeOverlay() {
 
 function enhance() {
   console.log("Enhancing...");
-  $("#enhanceSelector").parent().append(`<div class="loader"></div>`)
+  $("#enhanceSelector").parent().append(`<div class="loader"></div>`);
   $("#enhanceButton").toggle();
   $("#imageContainer").css("height", $("#background").height());
-  html2canvas($("#imageContainer").get(0)).then( function(orig) {
+  html2canvas($("#imageContainer").get(0)).then(function (orig) {
     let ctx = orig.getContext("2d");
     const origData = ctx.getImageData(0, 0, orig.width, orig.height);
 
-    let newData, choice = $("#enhanceSelector").children("option:selected").val();
+    let newData,
+      choice = $("#enhanceSelector").children("option:selected").val();
 
     if (choice === "negative") {
       newData = invert(origData);
@@ -730,21 +733,20 @@ function enhance() {
     $("#imageContainer").append(overlay);
     $("#imageContainer").append(`<div class="enhanceCloseButton" style="position:absolute; top:0px; right:0px; z-index:901" onclick="closeOverlay()">⨂</div>`);
 
-
     $("#enhanceButton").toggle();
     $(".loader").remove();
   });
 }
 
-$(document).ready(function() {
-  $('#toggleButton').click(function() {
-    if ($('body').css('cursor') === 'zoom-in') {
-      $('body').css('cursor', '');
-      $(this).removeClass('active');
+$(document).ready(function () {
+  $("#toggleButton").click(function () {
+    if ($("body").css("cursor") === "zoom-in") {
+      $("body").css("cursor", "");
+      $(this).removeClass("active");
       $(".enhanceOverlay").trigger("zoom.destroy");
     } else {
-      $('body').css('cursor', 'zoom-in');
-      $(this).addClass('active');
+      $("body").css("cursor", "zoom-in");
+      $(this).addClass("active");
       $(".enhanceOverlay").zoom({ magnify: 3 });
     }
   });

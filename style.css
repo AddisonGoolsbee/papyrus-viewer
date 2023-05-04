@@ -46,19 +46,22 @@ h2 {
   padding-right: 100px;
 }
 
-
 #papyri-info {
   position: relative;
 }
 
 #imageContainer {
-  width: 100%;
+  /* width: 100%; */
+  /* background-image: linear-gradient(45deg, #fff 25%, transparent 25%), linear-gradient(-45deg, #fff 25%, transparent 25%), linear-gradient(45deg, transparent 75%, #fff 75%), linear-gradient(-45deg, transparent 75%, #fff 75%); */
+  background-size: 20px 20px;
+  background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
   position: relative;
   margin: auto;
+  height: 75vh;
 }
 
 #imageContainer img {
-  height: auto;
+  width: auto;
   position: absolute;
   display: block;
   object-fit: fill;
@@ -294,31 +297,34 @@ select {
 }
 
 @keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 .enhanceCloseButton {
   position: absolute;
   opacity: 0.8;
-  color:red;
+  color: red;
   font-size: 4em;
   text-shadow: -1px -1px 0 white, 1px -1px 0 white, -1px 1px 0 white, 1px 1px 0 white;
   vertical-align: top;
-  line-height:1em;
+  line-height: 1em;
 }
 
 .enhanceCloseButton:hover {
   opacity: 1;
 }
 
-#timeline  {
+#timeline {
   height: 50%;
 }
 
 #metadata-fragment {
-    overflow: auto;
-    width: 20em;
-    height: 6em;
+  overflow: auto;
+  width: 20em;
+  height: 6em;
 }
-

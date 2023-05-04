@@ -166,6 +166,7 @@ function loadFragmentImages(fragments, path, resize) {
 
     f_img.on("load", function () {
       $(this).css("width", $(this).get(0).naturalWidth * resize);
+      $(this).css("height", $(this).get(0).naturalHeight * resize);
       f_img.css("left", left * resize + "px");
       f_img.css("top", top * resize + "px");
     });

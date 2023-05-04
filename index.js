@@ -180,7 +180,6 @@ function loadFragmentImages(fragments, path, resize) {
   });
 
   $("#imageContainer img").dblclick(fragmentFlip);
-  console.log("log");
   $("#imageContainer img").draggablePatched({
     //containment: 'img[src$="background.png"]',
 

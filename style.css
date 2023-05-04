@@ -1,23 +1,3 @@
-/* background-color: lightgray;
-}
-
-h1 {
-  text-align: center;
-}
-
-#imageContainer {
-  background-image: linear-gradient(45deg, #fff 25%, transparent 25%), linear-gradient(-45deg, #fff 25%, transparent 25%), linear-gradient(45deg, transparent 75%, #fff 75%), linear-gradient(-45deg, transparent 75%, #fff 75%);
-  background-size: 20px 20px;
-  background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
-  position: relative;
-}
-
-#imageContainer img {
-  height: 80vh;
-  position: absolute;
-  display: block;
-  object-fit: fill; */
-
 body {
   background-color: white;
   font-family: "Open Sans";
@@ -26,14 +6,13 @@ body {
 
 h1 {
   text-align: left;
-  margin-left: 21px;
   margin-bottom: 0;
   margin-top: 0;
   font-family: "Eczar";
   font-style: normal;
   font-weight: 500;
-  font-size: 48px;
-  line-height: 85px;
+  font-size: 28px;
+  padding: 5px 0 0 10px;
 }
 
 h2 {
@@ -113,9 +92,9 @@ label {
   list-style-type: none;
   margin: 0;
   padding: 0;
-  /* padding-left: 5; */
   overflow: hidden;
   background-color: #a5243d;
+  font-size: 14px;
 }
 
 .navbar-item {
@@ -126,7 +105,7 @@ label {
   display: block;
   color: white;
   text-align: center;
-  padding: 15px 50px;
+  padding: 7px 30px;
   text-decoration: none;
   font-family: "Open Sans";
 }
@@ -146,13 +125,16 @@ select {
   font-family: "Open Sans";
 }
 
+.buttonContainer {
+  width: min(24vw, 300px);
+}
+
 button {
-  margin: 10px;
   background-color: white;
   border-radius: 5px;
-  /* border: #A5243D; */
-  padding: 10px;
-  /* color: white; */
+  padding: 6px;
+  margin: 0 5px 5px 0;
+  font-size: min(14px, 1vw);
 }
 
 button:hover {
@@ -170,13 +152,14 @@ button:active {
   align-items: center;
   gap: 20px;
   justify-content: flex-start;
-  font-size: min(18px, 1.5vw);
-  margin-bottom: 30px;
+  font-size: min(14px, 1vw);
+  margin-bottom: 10px;
 }
 
 #options > * {
   padding-right: 20px;
   border-right: solid black 3px;
+  height: 6em;
 }
 
 #documentSelectorContainer,
@@ -187,12 +170,13 @@ button:active {
 }
 
 select {
-  font-size: min(18px, 1.5vw);
+  font-size: min(12px, 1vw);
   width: 12em;
+  margin-bottom: 10px;
 }
 
 #selectorContainer {
-  width: min(28vw, 400px);
+  width: min(28vw, 450px);
 }
 
 #checkboxContainer {
@@ -327,4 +311,5 @@ select {
   overflow: auto;
   width: 20em;
   height: 6em;
+  font-size: max(10px, min(1vw, 14px));
 }

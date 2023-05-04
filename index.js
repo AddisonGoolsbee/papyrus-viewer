@@ -148,6 +148,7 @@ function loadFragmentImages(fragments, path) {
 
   bg_img.on("load", function () {
     $("#imageContainer").css("width", bg_img.get(0).naturalWidth);
+    $("#imageContainer").css("height", $("#background").height());
   });
 
   for (f in fragments) {
@@ -342,6 +343,13 @@ function loadItem() {
     .then((data) => {
       loadFragmentImages(data, path);
     });
+
+  if (path == "documents/p.dura_116/01") {
+    document.getElementById("papyri-info").style.display = "block";
+  }
+  else {
+    document.getElementById("papyri-info").style.display = "none";
+  }
 }
 
 function buildItemSelector(item_counts) {

@@ -46,13 +46,10 @@ h2 {
   padding-right: 100px;
 }
 
-/* dealing with this later lol
-#fragmentInfo {
-  margin: auto;
+
+#papyri-info {
   position: relative;
-  padding-left: 20px;
-  padding-right: 20px;
-} */
+}
 
 #imageContainer {
   width: 100%;
